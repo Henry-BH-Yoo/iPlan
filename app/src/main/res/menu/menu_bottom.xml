@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/bottom_tab_daily"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:checked="true"
+        android:icon="@drawable/ic_daily"
+        android:title="@string/menu_daily" />
+
+    <item android:id="@+id/bottom_tab_monthly"
+       app:showAsAction="always"
+        android:enabled="true"
+        android:icon="@drawable/ic_monthly"
+        android:title="@string/menu_monthly"
+        />
+
+    <item android:id="@+id/bottom_tab_year"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:icon="@drawable/ic_yearly"
+        android:title="@string/menu_year"/>
+
+    <item
+        android:id="@+id/bottom_tab_life"
+        android:enabled="true"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_bucketlist"
+        android:title="@string/menu_life"
+        />
+</menu>
