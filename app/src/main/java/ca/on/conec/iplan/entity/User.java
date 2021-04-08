@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class User {
+public class  User {
     @PrimaryKey (autoGenerate = true)
     public int uid;
 
