@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/day_row_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/border_bottom"
+            android:padding="8dp">
+
+            <RadioButton
+                android:id="@+id/rdoDayRow"
+                android:layout_width="26dp"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/txtDayStartTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4.8"
+                android:paddingStart="5dp"
+                android:hint="Start Time"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/txtDayRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="Day Todo Name"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:id="@+id/imgBtnHasAlarm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5.4"
+                android:background="#FFFFFF"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/baseline_alarm_black_24dp" />
+
+            <CheckBox
+                android:id="@+id/chkIsDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5.5" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

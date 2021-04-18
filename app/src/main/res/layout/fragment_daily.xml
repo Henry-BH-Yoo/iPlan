@@ -6,65 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".fragment.DailyFragment">
 
-
-<!--    temp layout for demo-->
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="30dp"
-        android:padding="6dp">
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="#00BCD4"
+        app:tabPaddingEnd="10dp"
+        app:tabPaddingStart="10dp"
+        app:tabTextColor="#323232">
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:text="Mon Tue Wed Fri Sat Sun"
-            android:textAlignment="center"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:text="Mon" />
 
-        <CheckBox
-            android:id="@+id/checkBox1"
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6:30AM      Tea time"
-            android:textSize="18sp" />
+            android:text="Tue" />
 
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="7:30AM      Work out"
-            android:textSize="18sp" />
+            android:text="Wed" />
 
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="16:00PM      Read a book"
-            android:textSize="18sp" />
+            android:text="Wed" />
 
-    </LinearLayout>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thu" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fri" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sat" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sun" />
+    </com.google.android.material.tabs.TabLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_add_circle_24"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp" />
+        android:layout_margin="18dp"
+        android:clickable="true"
+        app:tint="@color/gray_50"
+        android:backgroundTint="@color/gray_700"
+        app:borderWidth="0dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/recycler_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginTop="60dp"-->
-<!--            android:padding="6dp"-->
-<!--            android:visibility="visible">-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_day"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:padding="6dp"
+        android:visibility="visible">
 
-<!--        </androidx.recyclerview.widget.RecyclerView>-->
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <include layout="@layout/bottom_sheet_day" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

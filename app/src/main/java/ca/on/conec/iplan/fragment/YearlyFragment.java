@@ -23,7 +23,7 @@ public class YearlyFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private FloatingActionButton fab;
+    FloatingActionButton fabYear;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,8 +32,9 @@ public class YearlyFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_yearly, container, false);
 
         // FloatingActionButton
-        fab = (FloatingActionButton) v.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fabYear = (FloatingActionButton) v.findViewById(R.id.fabYear);
+
+        fabYear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Add action will be created", Snackbar.LENGTH_LONG)
@@ -42,17 +43,17 @@ public class YearlyFragment extends Fragment {
         });
 
         // Create db
-        AppDatabase db = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
-
-        User user = new User();
-
-        user.setFirstName("Henry");
-        user.setLastName("Yoo");
-
-        new Thread(() -> {
-            Log.i("INFO", "INSERT Obj");
-            db.userDao().insertAll(user);
-        }).start();
+//        AppDatabase db = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
+//
+//        User user = new User();
+//
+//        user.setFirstName("Henry");
+//        user.setLastName("Yoo");
+//
+//        new Thread(() -> {
+//            Log.i("INFO", "INSERT Obj");
+//            db.userDao().insertAll(user);
+//        }).start();
 
         return v;
     }
