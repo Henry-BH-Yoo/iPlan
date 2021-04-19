@@ -44,7 +44,7 @@ public class BottomSheetBucketFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_create_bucket, container, false);
+        View v = inflater.inflate(R.layout.bottom_sheet_bucket, container, false);
 
         updateYn = false;
         bucketListViewModel = new ViewModelProvider.AndroidViewModelFactory(

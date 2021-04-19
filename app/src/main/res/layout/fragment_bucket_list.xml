@@ -33,6 +33,6 @@
 
     </LinearLayout>
 
-    <include layout="@layout/fragment_create_bucket" />
+    <include layout="@layout/bottom_sheet_bucket" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
