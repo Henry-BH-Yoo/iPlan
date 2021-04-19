@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import ca.on.conec.iplan.R;
 import ca.on.conec.iplan.database.AppDatabase;
-import ca.on.conec.iplan.entity.User;
 
 public class MonthlyFragment extends Fragment {
     public MonthlyFragment() {
@@ -28,15 +27,13 @@ public class MonthlyFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_monthly, container, false);
 
-        userText = v.findViewById(R.id.userText);
-
         //디비생성
-        AppDatabase db = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
-
-        new Thread(() -> {
-            Log.i("INFO" , db.userDao().getAll().toString());
-            userText.setText(db.userDao().getAll().toString());
-        }).start();
+//        AppDatabase db = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
+//
+//        new Thread(() -> {
+//            Log.i("INFO" , db.userDao().getAll().toString());
+//            userText.setText(db.userDao().getAll().toString());
+//        }).start();
 
 
         return v;

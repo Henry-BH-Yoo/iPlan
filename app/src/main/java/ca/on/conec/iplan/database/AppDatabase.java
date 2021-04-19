@@ -12,23 +12,21 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import ca.on.conec.iplan.dao.BucketListDao;
 import ca.on.conec.iplan.dao.TodoDao;
-import ca.on.conec.iplan.dao.UserDao;
+import ca.on.conec.iplan.entity.BucketList;
 import ca.on.conec.iplan.entity.Todo;
-import ca.on.conec.iplan.entity.User;
 
 /*
  * Creating database use many resources, so recommend Singleton Pattern
- *
- *
  */
-@Database(entities = {User.class, Todo.class}, version = 2)
+@Database(entities = {BucketList.class ,  Todo.class}, version = 1, exportSchema = false)
 @TypeConverters({LocalTimeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
-    public abstract UserDao userDao();
+    public abstract BucketListDao bucketDao();
     public abstract TodoDao todoDao();
 
     public static final ExecutorService databaseWriterExecutor = Executors.newFixedThreadPool(4);
@@ -42,6 +40,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 TodoDao todoDao = INSTANCE.todoDao();
                 todoDao.deleteAll(); // make it clean
 
+                BucketListDao bucketListDao = INSTANCE.bucketDao();
                 // write to the table
 
             });

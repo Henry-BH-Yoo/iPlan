@@ -1,167 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.CreateBucketFragment">
-
-    <LinearLayout
+    android:id="@+id/createBucket"
+    tools:context=".fragment.BottomSheetBucketFragment"
+    style="@style/Animation.Design.BottomSheetDialog"
+    android:background="#fff"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="300dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    >
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         >
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/border_bottom"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
             >
 
-            <EditText
-                android:id="@+id/editTextTextPersonName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:background="#00000000"
-                android:hint="Enter the title"
+                android:orientation="horizontal"
+                android:background="@drawable/border_bottom"
+                >
+
+                <EditText
+                    android:id="@+id/edtBucketTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:background="#00000000"
+                    android:hint="@string/title_hint"
+                    android:padding="20dp"
+                    style="@style/DEFAULT_FONT_STYLE"
+                     />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/border_bottom"
                 android:padding="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/txtProgressType"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/progress_type"
+                    style="@style/DEFAULT_FONT_STYLE"
+                    />
+
+                <Spinner
+                    android:id="@+id/spnProgressType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@null"
+                    style="@style/DEFAULT_FONT_STYLE"
+                    android:spinnerMode="dialog" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lineQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_bottom"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <include
+                    android:id="@+id/goal_layout"
+                    layout="@layout/goal_layout" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/border_bottom"
+                android:padding="20dp"
+                >
+
+                <TextView
+                    android:id="@+id/txtTargetAge"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    style="@style/DEFAULT_FONT_STYLE"
+                    android:text="@string/target_age" />
+
+                <EditText
+                    android:id="@+id/edtTargetAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/target_age_hint"
+                    style="@style/DEFAULT_FONT_STYLE"
+                    android:inputType="numberSigned" />
+
+
+            </LinearLayout>
+            <!--
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:background="@drawable/border_bottom"
+                >
+                <TextView
+                    android:id="@+id/txtPriority"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/priority"
+                    style="@style/DEFAULT_FONT_STYLE"
+                    />
+
+
+                <RadioGroup
+                    android:id="@+id/priorityGroup"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    >
+
+                    <RadioButton
+                        android:text="@string/top"
+                        android:id="@+id/priorityTop"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="10dp"
+                        style="@style/DEFAULT_FONT_STYLE"
+                        />
+
+                    <RadioButton
+                        android:text="@string/middle"
+                        android:id="@+id/priorityMiddle"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingRight="10dp"
+                        style="@style/DEFAULT_FONT_STYLE"
+                        />
+
+                    <RadioButton
+                        android:text="@string/low"
+                        android:id="@+id/priorityLow"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        style="@style/DEFAULT_FONT_STYLE"
+                        />
+
+                </RadioGroup>
+            </LinearLayout>
+            -->
+            <!--
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:background="@drawable/border_bottom"
+                >
+
+                <TextView
+                    android:id="@+id/txtSuccess"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    style="@style/DEFAULT_FONT_STYLE"
+                    android:text="Success" />
+s
+                <Switch
+                    android:id="@+id/swSuccess"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
                  />
 
-        </LinearLayout>
+            </LinearLayout>
+            -->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/border_bottom"
-            android:padding="20dp"
-            >
-
-            <TextView
-                android:id="@+id/txtProgressType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:textSize="16sp"
-                android:text="Progress Type" />
-
-            <Spinner
-                android:id="@+id/spnProgressType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/border_bottom"
-            android:padding="20dp"
-            >
-
-            <TextView
-                android:id="@+id/txtTargetAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="16sp"
-                android:text="Target Age" />
-
-            <EditText
-                android:id="@+id/editTextNumberSigned"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberSigned" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp"
-            >
-
-            <TextView
-                android:id="@+id/txtPriority"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:textSize="16sp"
-                android:text="Priority" />
+                android:orientation="horizontal"
+                android:padding="20dp"
+                >
+
+                <Button
+                    android:id="@+id/resetBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/reset_btn"
+                    android:layout_marginRight="10dp"
+                    />
+
+                <Button
+                    android:id="@+id/saveBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/save_btn"
+                    android:layout_marginLeft="10dp"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/border_bottom"
-            android:padding="20dp"
-            android:layout_marginBottom="30dp"
-            >
-
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/round_button"
-                android:layout_marginRight="10dp"
-                android:text="Top" />
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/round_button"
-                android:text="Middle" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/round_button"
-                android:text="Low" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp"
-            >
-
-            <TextView
-                android:id="@+id/txtSuccess"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="16sp"
-                android:text="Success" />
-
-            <Switch
-                android:id="@+id/swSuccess"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                />
-
-        </LinearLayout>
-
-    </LinearLayout>
-</FrameLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

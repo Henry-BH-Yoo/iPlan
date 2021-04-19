@@ -29,4 +29,32 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
+
+    <!-- BucketList Create-->
+    <string name="title_hint"> Enter the title </string>
+    <string name="progress_type">Progress Type</string>
+    <string name="target_age">Target Age</string>
+    <string name="target_age_hint">Enter the target age</string>
+    <string name="success">Success</string>
+
+    <!-- Priority Text -->
+    <string name='priority'>Proiority</string>
+    <string name="top"> TOP </string>
+    <string name="middle"> MIDDLE </string>
+    <string name="low"> LOW </string>
+
+    <!-- Goal Text -->
+    <string name="goal"> GOAL </string>
+    <string name="goal_current_status_hint"> Current Status </string>
+    <string name="goal_current_money_hint"> Current Money </string>
+    <string name="goal_current_satisfaction_hint"> Current Satisfaction </string>
+    <string name="goal_hint"> Goal </string>
+    <string name="divider"> / </string>
+    <string name="hundred"> 100% </string>
+
+    <!-- Button -->
+    <string name="reset_btn"> RESET </string>
+    <string name="save_btn"> SAVE </string>
+
 </resources>
+

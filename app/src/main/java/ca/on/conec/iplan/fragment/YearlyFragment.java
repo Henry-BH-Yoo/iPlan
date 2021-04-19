@@ -15,7 +15,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import ca.on.conec.iplan.R;
 import ca.on.conec.iplan.database.AppDatabase;
-import ca.on.conec.iplan.entity.User;
 
 public class YearlyFragment extends Fragment {
 

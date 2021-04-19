@@ -40,9 +40,11 @@ dependencies {
     implementation 'org.projectlombok:lombok'
     implementation 'org.projectlombok:lombok:1.18.12'
     implementation 'androidx.preference:preference:1.1.1'
+    implementation 'com.github.prolificinteractive:material-calendarview:2.0.1'
     annotationProcessor "androidx.room:room-compiler:2.2.6"
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
 }
