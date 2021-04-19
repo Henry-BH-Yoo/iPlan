@@ -32,13 +32,12 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
         int fromPosition = viewHolder.getAdapterPosition();
         int toPosition = target.getAdapterPosition();
 
-
         if(mFrom == -1) {
             mFrom =  fromPosition;
         }
         mTo = toPosition;
 
-        return listener.onItemMove(fromPosition,toPosition);
+        return listener.onItemMove(mFrom,mTo);
     }
 
     @Override
@@ -58,12 +57,12 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
         if(mFrom != -1 && mTo != -1 && mFrom != mTo) {
             //reallyMoved(dragFrom, dragTo);
-
             Log.d("DEBUG" , "Completed Drag and deop");
+            listener.onComplete(mFrom , mTo);
         }
 
         mFrom = mTo = -1;
-        listener.onComplete();
+
     }
 
 }

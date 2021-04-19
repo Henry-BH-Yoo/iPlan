@@ -38,4 +38,5 @@ public class BucketRepository {
     public void delete(BucketList bucket) {
         AppDatabase.databaseWriterExecutor.execute( () -> bucketListDao.delete(bucket));
     }
+
 }

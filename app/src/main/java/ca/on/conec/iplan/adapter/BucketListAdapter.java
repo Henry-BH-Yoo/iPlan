@@ -9,12 +9,15 @@ package ca.on.conec.iplan.adapter;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -85,13 +88,11 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Vi
     }
 
     @Override
-    public void onComplete() {
-        for(int i = 0 ; i < bucketList.size() ; i++) {
-            BucketList tempBucket = (BucketList)bucketList.get(i);
-            tempBucket.setOrder(i);
-
-            BucketListViewModel.update(tempBucket);
-        }
+    public void onComplete(int from_position , int to_position) {
+//        for(int i = 0 ; i < bucketList.size() ; i++) {
+//            BucketList bucket = bucketList.get(i);
+//            BucketListViewModel.update(bucket);
+//        }
     }
 
 
