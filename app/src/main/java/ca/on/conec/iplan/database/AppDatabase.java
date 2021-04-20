@@ -20,7 +20,7 @@ import ca.on.conec.iplan.entity.Todo;
 /*
  * Creating database use many resources, so recommend Singleton Pattern
  */
-@Database(entities = {BucketList.class ,  Todo.class}, version = 1, exportSchema = false)
+@Database(entities = {BucketList.class ,  Todo.class}, version = 3, exportSchema = false)
 @TypeConverters({LocalTimeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 

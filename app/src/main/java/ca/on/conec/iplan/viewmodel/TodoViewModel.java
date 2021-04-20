@@ -1,21 +1,25 @@
-package ca.on.conec.iplan.entity;
+package ca.on.conec.iplan.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
 import ca.on.conec.iplan.database.AppDatabase;
 import ca.on.conec.iplan.database.iPlanRepository;
+import ca.on.conec.iplan.entity.Todo;
 
 // Inherits from AndroidViewModel, different from SharedViewModel
 public class TodoViewModel extends AndroidViewModel {
 
     public static iPlanRepository repository;
+
     public final LiveData<List<Todo>> allTodos;
+
 
     public TodoViewModel(@NonNull Application application) {
         super(application);

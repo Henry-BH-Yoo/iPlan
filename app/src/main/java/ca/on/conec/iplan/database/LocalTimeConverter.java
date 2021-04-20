@@ -11,8 +11,6 @@ import java.time.format.DateTimeFormatter;
 // Type converter for Room DB, or general use
 public class LocalTimeConverter  {
 
-    //todo if user enters wrong type of time (ex 8:20), app crashes
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @TypeConverter
     public static LocalTime toTime(String timeString) {

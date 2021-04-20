@@ -21,6 +21,78 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:text="M"
+                android:textAlignment="center" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:text="T"
+                android:textAlignment="center" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipWed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:text="W"
+                android:textAlignment="center" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipThu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:text="T"
+                android:textAlignment="center" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:text="F"
+                android:textAlignment="center" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:text="S"
+                android:textAlignment="center"
+                android:textColor="#2196F3" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checkable="true"
+                android:text="S"
+                android:textAlignment="center"
+                android:textColor="#E91E63" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/etxtDayTodo"
                 android:layout_width="wrap_content"
