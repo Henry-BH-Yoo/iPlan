@@ -21,10 +21,6 @@ public class Todo {
     @ColumnInfo(name = "is_done")
     public boolean isDone; // Day, Year
 
-//    public int progress; // Year
-//
-//    public String note; // Year
-
     @ColumnInfo(name = "has_alarm")
     public boolean hasAlarm; // Day
 

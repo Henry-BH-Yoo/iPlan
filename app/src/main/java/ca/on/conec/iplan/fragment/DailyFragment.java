@@ -4,9 +4,10 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,18 +15,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import ca.on.conec.iplan.R;
-import ca.on.conec.iplan.activity.MainActivity;
+import ca.on.conec.iplan.adapter.ItemTouchHelperCallback;
 import ca.on.conec.iplan.adapter.OnTodoClickListener;
 import ca.on.conec.iplan.adapter.RecyclerViewAdapter;
 import ca.on.conec.iplan.viewmodel.SharedViewModel;
@@ -34,13 +33,9 @@ import ca.on.conec.iplan.viewmodel.TodoViewModel;
 
 public class DailyFragment extends Fragment implements OnTodoClickListener {
 
-    private static final String TAG = "ITEM";
-
     public DailyFragment() {
         // Required empty public constructor
     }
-
-    //todo Drag n drop for delete
 
     private TodoViewModel todoViewModel;
     private SharedViewModel sharedViewModel;
@@ -58,7 +53,10 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
     List<Todo> onlyFriTodos;
     List<Todo> onlySatTodos;
     List<Todo> onlySunTodos;
+
     OnTodoClickListener todoClickListener;
+
+    private ItemTouchHelper mItemTouchHelper;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -70,8 +68,9 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
 
         // Connect a Bottom sheet to create and edit dayTodo
         bottomSheetDayFragment = new BottomSheetDayFragment();
-        FrameLayout frameLayout = v.findViewById(R.id.bottomSheetDay);
-        BottomSheetBehavior<FrameLayout> bottomSheetBehavior = BottomSheetBehavior.from(frameLayout);
+
+        CoordinatorLayout coordinatorLayout = v.findViewById(R.id.bottomSheetDay);
+        BottomSheetBehavior<CoordinatorLayout> bottomSheetBehavior = BottomSheetBehavior.from(coordinatorLayout);
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.STATE_HIDDEN);
 
         // Declare Recycler View
@@ -87,8 +86,6 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
 
-
-
         // Helper for filtering List and Adapter
         todoClickListener = this;
 
@@ -101,9 +98,13 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
             // Attach RecyclerView Adapter
             recyclerViewAdapter = new RecyclerViewAdapter(onlyMonTodos, todoClickListener);
             recyclerView.setAdapter(recyclerViewAdapter);
+
+
+            //todo swipe delete
+            // when swipe from right to left, ERROR of array null
+            mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+            mItemTouchHelper.attachToRecyclerView(recyclerView);
         });
-
-
 
 
         // tab layout of 7 days
@@ -178,8 +179,6 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
     private void showBottomSheetDialog() {
         this.getChildFragmentManager().beginTransaction().add(bottomSheetDayFragment, bottomSheetDayFragment.getTag());
 
-//        bottomSheetDayFragment.onDetach();
-//        bottomSheetDayFragment.onDestroy();
         bottomSheetDayFragment.show(getParentFragmentManager(), bottomSheetDayFragment.getTag());
     }
 
@@ -196,7 +195,8 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
     public void onTodoRadioBtnClick(Todo todo) {
         Log.d("My", "onRadioBtnClick: " + todo.getName());
 
-        TodoViewModel.delete(todo);
+        // replacing swipe to delete
+//        TodoViewModel.delete(todo);
 
         // it will refresh RecyclerView
         recyclerViewAdapter.notifyDataSetChanged();
