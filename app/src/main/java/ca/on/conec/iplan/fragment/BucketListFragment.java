@@ -59,7 +59,7 @@ public class BucketListFragment extends Fragment {
 
         bottomSheetBucketFragment = new BottomSheetBucketFragment();
 
-        CoordinatorLayout frameLayout = v.findViewById(R.id.createBucket);
+        CoordinatorLayout frameLayout = v.findViewById(R.id.bottomSheetBucket);
         BottomSheetBehavior<CoordinatorLayout> bottomSheetBehavior = BottomSheetBehavior.from(frameLayout);
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.STATE_HIDDEN);
 
