@@ -27,7 +27,7 @@ public class LocalTimeConverter  {
         if (time == null) {
             return null;
         } else {
-            return time.format(DateTimeFormatter.ofPattern("HH:mm")); // ex 22:40 - 22:40 PM is "HH:mm a"
+            return time.format(DateTimeFormatter.ofPattern("HH:mm")); // ex 22:40 or 07:00
         }
     }
 }

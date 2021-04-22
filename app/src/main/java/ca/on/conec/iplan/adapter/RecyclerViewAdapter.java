@@ -18,12 +18,14 @@ import java.util.List;
 import ca.on.conec.iplan.R;
 import ca.on.conec.iplan.database.LocalTimeConverter;
 import ca.on.conec.iplan.entity.Todo;
+import ca.on.conec.iplan.viewmodel.TodoViewModel;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements ItemTouchHelperListener {
 
     private final List<Todo> todoList;
 
     private final OnTodoClickListener todoClickListener;
+
 
     // Add OnTodoClickListener to RecyclerViewAdapter to allow each row in RecyclerView is clickable
     public RecyclerViewAdapter(List<Todo> todoList, OnTodoClickListener onTodoClickListener) {
@@ -106,4 +108,37 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         }
     }
+
+
+    // For swipe to delete
+    @Override
+    public boolean onItemMove(int from_position, int to_position) {
+
+//        Todo todo = todoList.get(from_position);
+//        todoList.remove(from_position);
+//        todoList.add(to_position, todo);
+
+        notifyItemMoved(from_position, to_position);
+
+        return true;
+    }
+
+    // For swipe to delete
+    @Override
+    public void onItemSwipe(int position) {
+
+//        Todo todo = todoList.get(position);
+//        TodoViewModel.delete(todo);
+//        todoList.remove(position);
+
+        notifyItemRemoved(position);
+    }
+
+    // For swipe to delete
+    @Override
+    public void onComplete(int from_position, int to_position) {
+
+//        this.notifyDataSetChanged();
+    }
+
 }

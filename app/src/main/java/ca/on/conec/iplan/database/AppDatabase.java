@@ -14,13 +14,15 @@ import java.util.concurrent.Executors;
 
 import ca.on.conec.iplan.dao.BucketListDao;
 import ca.on.conec.iplan.dao.TodoDao;
+import ca.on.conec.iplan.dao.TodoYearDao;
 import ca.on.conec.iplan.entity.BucketList;
 import ca.on.conec.iplan.entity.Todo;
+import ca.on.conec.iplan.entity.TodoYear;
 
 /*
  * Creating database use many resources, so recommend Singleton Pattern
  */
-@Database(entities = {BucketList.class ,  Todo.class}, version = 3, exportSchema = false)
+@Database(entities = {BucketList.class ,  Todo.class, TodoYear.class}, version = 4, exportSchema = false)
 @TypeConverters({LocalTimeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -28,6 +30,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract BucketListDao bucketDao();
     public abstract TodoDao todoDao();
+    public abstract TodoYearDao todoYearDao();
 
     public static final ExecutorService databaseWriterExecutor = Executors.newFixedThreadPool(4);
 
@@ -41,7 +44,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 todoDao.deleteAll(); // make it clean
 
                 BucketListDao bucketListDao = INSTANCE.bucketDao();
-                // write to the table
+                TodoYearDao todoYearDao = INSTANCE.todoYearDao();
 
             });
         }
