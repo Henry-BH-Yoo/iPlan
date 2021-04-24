@@ -30,7 +30,7 @@ public interface TodoDao {
 
 
     @Query("SELECT * FROM todo_table WHERE todo_table.has_alarm == 1 AND todo_table.days == :days AND (todo_table.start_time BETWEEN :startTime AND :hrLaterTime)")
-    LiveData<List<Todo>> getTodosWithAlarm(LocalTime startTime, LocalTime hrLaterTime, int days);
+    LiveData<List<Todo>> getTodosWithAlarm(String startTime, String hrLaterTime, int days);
 //    @Query("SELECT * FROM todo_table WHERE has_alarm == 1 AND days == :days AND start_time BETWEEN :startTime AND :hrLaterTime")
 //    List<Todo> getTodosWithAlarm(LocalTime startTime, LocalTime hrLaterTime, int days);
 

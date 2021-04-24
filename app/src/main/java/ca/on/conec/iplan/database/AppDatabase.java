@@ -13,16 +13,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import ca.on.conec.iplan.dao.BucketListDao;
+import ca.on.conec.iplan.dao.MonthlyPlanDao;
 import ca.on.conec.iplan.dao.TodoDao;
 import ca.on.conec.iplan.dao.TodoYearDao;
 import ca.on.conec.iplan.entity.BucketList;
+import ca.on.conec.iplan.entity.MonthlyPlan;
 import ca.on.conec.iplan.entity.Todo;
 import ca.on.conec.iplan.entity.TodoYear;
 
 /*
  * Creating database use many resources, so recommend Singleton Pattern
  */
-@Database(entities = {BucketList.class ,  Todo.class, TodoYear.class}, version = 5, exportSchema = false)
+@Database(entities = {BucketList.class ,  Todo.class, TodoYear.class , MonthlyPlan.class}, version = 1, exportSchema = false)
 @TypeConverters({LocalTimeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -31,6 +33,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract BucketListDao bucketDao();
     public abstract TodoDao todoDao();
     public abstract TodoYearDao todoYearDao();
+    public abstract MonthlyPlanDao mPlanDao();
 
     public static final ExecutorService databaseWriterExecutor = Executors.newFixedThreadPool(4);
 
@@ -45,6 +48,8 @@ public abstract class AppDatabase extends RoomDatabase {
 
                 BucketListDao bucketListDao = INSTANCE.bucketDao();
                 TodoYearDao todoYearDao = INSTANCE.todoYearDao();
+
+                MonthlyPlanDao mPlanDao = INSTANCE.mPlanDao();
 
             });
         }

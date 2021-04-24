@@ -5,8 +5,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -26,20 +28,27 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment fragment;
 
+    private SharedPreferences sharedPref;
+    private boolean isDarkAppTheme;
+    private ActionBar actionBar;
+
+    private int menuNumber = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.Theme_IPlan);
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        setAppTheme();
 
 //        startService(new Intent(getApplicationContext(), NotificationService.class));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        ActionBar actionBar = getSupportActionBar();
-
-
+        actionBar = getSupportActionBar();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
 
         fragment = new DailyFragment();
 
@@ -53,15 +62,22 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.bottom_tab_daily:
+                        menuNumber = 1;
                         fragment = new DailyFragment();
+                        actionBar.setTitle("Day Plan");
                         break;
                     case R.id.bottom_tab_monthly:
+                        menuNumber = 2;
                         fragment = new MonthlyFragment();
+                        actionBar.setTitle("Month Plan");
                         break;
                     case R.id.bottom_tab_year:
+                        menuNumber = 3;
                         fragment = new YearlyFragment();
+                        actionBar.setTitle("Year Plan");
                         break;
                     case R.id.bottom_tab_life:
+                        menuNumber = 4;
                         fragment = new BucketListFragment();
                         break;
                 }
@@ -77,10 +93,43 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 return false;
+
             }
         });
 
     }
+
+
+    public void changeMenu(int menuNumber) {
+        switch(menuNumber) {
+            case 1 :
+                bottomNavigationView.setSelectedItemId(R.id.bottom_tab_daily);
+                break;
+            case 2 :
+                bottomNavigationView.setSelectedItemId(R.id.bottom_tab_monthly);
+                break;
+            case 3 :
+                bottomNavigationView.setSelectedItemId(R.id.bottom_tab_year);
+                break;
+            case 4 :
+                bottomNavigationView.setSelectedItemId(R.id.bottom_tab_life);
+                break;
+        }
+    }
+
+    /**
+     * App theme setting
+     */
+    private void setAppTheme() {
+        isDarkAppTheme = sharedPref.getBoolean("darkAppTheme", false);
+
+        if(isDarkAppTheme) {
+            setTheme(R.style.Theme_IPlan_Dark);
+        } else {
+            setTheme(R.style.Theme_IPlan);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,6 +154,24 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onPause() {
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("menuNumber", menuNumber);
+        editor.commit();
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        menuNumber = sharedPref.getInt("menuNumber" , 0);
+
+        changeMenu(menuNumber);
     }
 
     // For Local Notification Service

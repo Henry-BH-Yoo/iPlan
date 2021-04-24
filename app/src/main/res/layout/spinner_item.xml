@@ -4,6 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="@drawable/border_bottom"
-    style="@style/DEFAULT_FONT_STYLE"
     android:gravity="center"
     />

@@ -7,9 +7,9 @@
     android:id="@+id/bottomSheetBucket"
     tools:context=".fragment.BottomSheetBucketFragment"
     style="@style/Animation.Design.BottomSheetDialog"
-    android:background="#fff"
+    android:background="?attr/colorPrimary"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="300dp"
+    app:behavior_fitToContents="false"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     >
     <ScrollView
@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@drawable/border_bottom"
             >
 
             <LinearLayout
@@ -36,10 +37,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:background="#00000000"
                     android:hint="@string/title_hint"
                     android:padding="20dp"
-                    style="@style/DEFAULT_FONT_STYLE"
                      />
 
             </LinearLayout>
@@ -57,7 +56,6 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:text="@string/progress_type"
-                    style="@style/DEFAULT_FONT_STYLE"
                     />
 
                 <Spinner
@@ -66,7 +64,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="@null"
-                    style="@style/DEFAULT_FONT_STYLE"
                     android:spinnerMode="dialog" />
             </LinearLayout>
 
@@ -96,7 +93,6 @@
                     android:id="@+id/txtTargetAge"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    style="@style/DEFAULT_FONT_STYLE"
                     android:text="@string/target_age" />
 
                 <EditText
@@ -105,7 +101,6 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/target_age_hint"
-                    style="@style/DEFAULT_FONT_STYLE"
                     android:inputType="numberSigned" />
 
 
@@ -207,19 +202,17 @@ s
                     android:id="@+id/resetBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/reset_btn"
                     android:layout_marginRight="10dp"
-                    />
+                    android:layout_weight="1"
+                    android:text="@string/reset_btn" />
 
                 <Button
                     android:id="@+id/saveBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/save_btn"
                     android:layout_marginLeft="10dp"
-                    />
+                    android:layout_weight="1"
+                    android:text="@string/save_btn" />
 
             </LinearLayout>
 

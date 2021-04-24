@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -37,9 +38,7 @@ import ca.on.conec.iplan.viewmodel.TodoViewModel;
 public class NotificationService extends Service {
 
     TodoViewModel todoViewModel;
-
     List<Todo> todosWithAlarm;
-
 
     public NotificationService() {
     }
@@ -57,6 +56,8 @@ public class NotificationService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate() {
+
+        Log.d("DEBUG" , ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SErvice Create??");
 
         final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -82,9 +83,19 @@ public class NotificationService extends Service {
         //todo find the dayTodo which isAlarm is true, then send notification of it
 
         LocalTime timeNow = LocalTime.now();
+        LocalTime timeHrStart = timeNow.minusHours(1);
         LocalTime timeHrLater = timeNow.plusHours(1);
 
+        Log.d("DEBUG" , "timeHrStart : " + timeHrStart);
+        Log.d("DEBUG" , "timeHrLater : " + timeHrLater);
+
+        String timeS = timeHrStart.getHour() + ":" + timeHrStart.getMinute();
+        String timeE = timeHrLater.getHour() + ":" + timeHrLater.getMinute();
         int days = 5; // Fri
+
+        Log.d("DEBUG" , "timeS : " + timeS);
+        Log.d("DEBUG" , "timeE : " + timeE);
+        Log.d("DEBUG" , "days : " + days + "");
 
         // It is for LiveData method in iPlanRepository.java
         todoViewModel = new ViewModelProvider.AndroidViewModelFactory(
@@ -95,9 +106,7 @@ public class NotificationService extends Service {
 //        todoViewModel.getTodosWithAlarm(timeNow, timeHrLater, days).observe(lifecycleOwner, todos -> {
 //            todosWithAlarm = todos;
 //        });
-        todoViewModel.getTodosWithAlarm(timeNow, timeHrLater, days).observeForever(todos -> {
-            todosWithAlarm = todos;
-        });
+
 
 
         final Notification notification = new Notification.Builder(getApplicationContext(), "notiChannel")
@@ -108,15 +117,25 @@ public class NotificationService extends Service {
                 .setContentIntent(pendingIntent)
                 .build();
 
-        if (todosWithAlarm != null ) {
-            notificationManager.notify(1, notification);
-            stopSelf();
-            Toast.makeText(this, "todosWithAlarm exists", Toast.LENGTH_LONG).show();
-        } else {
-            notificationManager.notify(1, notificationFail);
-            stopSelf();
-            Toast.makeText(this, "todosWithAlarm is null", Toast.LENGTH_LONG).show();
-        }
+
+        todoViewModel.getTodosWithAlarm(timeS, timeE, days).observeForever(todos -> {
+            todosWithAlarm = todos;
+
+            if (todosWithAlarm != null ) {
+                notificationManager.notify(1, notification);
+                stopSelf();
+                Toast.makeText(this, "todosWithAlarm exists", Toast.LENGTH_LONG).show();
+            } else {
+                notificationManager.notify(1, notificationFail);
+                stopSelf();
+                Toast.makeText(this, "todosWithAlarm is null", Toast.LENGTH_LONG).show();
+            }
+
+        });
+
+
+
+
 
 //        Toast.makeText(this, "Service onCreate called", Toast.LENGTH_LONG).show();
         super.onCreate();

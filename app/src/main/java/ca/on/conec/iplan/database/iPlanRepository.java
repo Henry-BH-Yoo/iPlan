@@ -32,7 +32,7 @@ public class iPlanRepository {
     }
 
 
-    public LiveData<List<Todo>> getTodosWithAlarm(LocalTime startTime, LocalTime hrLaterTime, int days) {
+    public LiveData<List<Todo>> getTodosWithAlarm(String startTime, String hrLaterTime, int days) {
         return todoDao.getTodosWithAlarm(startTime, hrLaterTime, days);
     }
 //    public List<Todo> getTodosWithAlarm(LocalTime startTime, LocalTime hrLaterTime, int days) {

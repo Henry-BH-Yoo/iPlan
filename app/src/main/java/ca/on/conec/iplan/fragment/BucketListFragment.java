@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +54,8 @@ public class BucketListFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_bucket_list, container, false);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        recyclerView.addItemDecoration(new DividerItemDecoration(v.getContext(), 1));
+
 
         bucketListViewModel = new ViewModelProvider.AndroidViewModelFactory(
                 getActivity().getApplication()).create(BucketListViewModel.class);

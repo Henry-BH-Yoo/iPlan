@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.MonthlyFragment">
 
-    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/calendarView"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addMonthlyPlanBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:mcv_showOtherDates="all"
-        app:mcv_selectionColor="#00F"
-        />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="18dp"
+        android:clickable="true"
+        app:tint="@color/gray_50"
+        android:backgroundTint="@color/gray_700"
+        app:borderWidth="0dp"
+        android:focusable="true"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:mcv_showOtherDates="defaults"
+            app:mcv_selectionColor="@color/gray_700"
+            app:mcv_dateTextAppearance="?attr/colorOnPrimary"
+            app:mcv_headerTextAppearance="?attr/colorOnPrimary"
+            app:mcv_weekDayTextAppearance="?attr/colorOnPrimary"
+            />
+
+
+        <include android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            layout="@layout/recycler_view" />
+
+    </LinearLayout>
+
+    <include layout="@layout/bottom_sheet_month" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

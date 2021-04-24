@@ -1,6 +1,7 @@
 package ca.on.conec.iplan.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -8,15 +9,24 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import ca.on.conec.iplan.R;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    private boolean isDarkAppTheme;
+    private SharedPreferences sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.Theme_IPlan);
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        setAppTheme();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
@@ -29,6 +39,20 @@ public class SettingsActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+    }
+
+    /**
+     * App theme setting
+     */
+    private void setAppTheme() {
+        isDarkAppTheme = sharedPref.getBoolean("darkAppTheme", false);
+
+        if(isDarkAppTheme) {
+            setTheme(R.style.Theme_IPlan_Dark);
+        } else {
+            setTheme(R.style.Theme_IPlan);
         }
     }
 
@@ -49,11 +73,11 @@ public class SettingsActivity extends AppCompatActivity {
         boolean rtnValue = true;
         switch(item.getItemId()) {
             case android.R.id.home:
-                Log.i("INFO" , "click the back button");
 
                 super.onBackPressed();
+                finish();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-                Log.i("INFO" , "Finish");
                 break;
             default :
                 rtnValue =  super.onOptionsItemSelected(item);

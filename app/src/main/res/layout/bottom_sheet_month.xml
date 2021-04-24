@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottomSheetYear"
+    android:id="@+id/bottomSheetMonth"
     style="@style/Animation.Design.BottomSheetDialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="?attr/colorPrimary"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="550dp"
+    app:behavior_peekHeight="300dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 
@@ -22,14 +22,14 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/etxtYearTodo"
+                android:id="@+id/edtMPlanTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="@string/title_hint"
                 android:background="#00000000"
-                android:padding="15dp"
+                android:padding="20dp"
                 android:inputType="textPersonName" />
 
         </LinearLayout>
@@ -37,68 +37,43 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/txtProgressYear"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:background="#00000000"
-                android:ems="10"
-                android:padding="10dp"
-                android:text="@string/progress_type"
-                android:textSize="16dp" />
-
-            <Spinner
-                android:id="@+id/spnProgressTypeYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:background="@null"
-                android:spinnerMode="dialog" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <include
-                android:id="@+id/goalLayoutYear"
-                layout="@layout/goal_layout_year" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/etxtMlNoteYear"
+                android:id="@+id/edtMPlanStart"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#4AD6D3D3"
+                android:focusable="false"
+                android:clickable="true"
+                android:textAlignment="center"
                 android:ems="10"
-                android:gravity="start|top"
-                android:hint="@string/enter_contents_of_note"
-                android:inputType="textMultiLine"
-                android:padding="15dp" />
+                android:inputType="textPersonName"
+                android:padding="20dp"
+                />
+
+            <EditText
+                android:id="@+id/edtMPlanEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:focusable="false"
+                android:clickable="true"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="20dp"
+                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="15dp">
 
             <Button
-                android:id="@+id/btnResetYear"
+                android:id="@+id/resetBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -107,13 +82,14 @@
                 />
 
             <Button
-                android:id="@+id/btnSaveYear"
+                android:id="@+id/saveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/save_btn"
                 android:layout_marginLeft="10dp"
                 />
+
 
         </LinearLayout>
 

@@ -18,7 +18,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/goal"
                 android:layout_gravity="center"
-                style="@style/DEFAULT_FONT_STYLE"
                 />
         </LinearLayout>
 
@@ -38,7 +37,6 @@
                 android:hint="@string/goal_current_status_hint"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="10dp"
-                style="@style/DEFAULT_FONT_STYLE"
                 />
 
             <TextView
@@ -48,7 +46,6 @@
                 android:layout_gravity="center_vertical"
                 android:text="@string/divider"
                 android:textStyle="bold"
-                style="@style/DEFAULT_FONT_STYLE"
                 />
 
             <EditText
@@ -61,7 +58,6 @@
                 android:layout_gravity="center_vertical"
                 android:hint="@string/goal_hint"
                 android:paddingLeft="10dp"
-                style="@style/DEFAULT_FONT_STYLE"
                 />
         </LinearLayout>
     </LinearLayout>
