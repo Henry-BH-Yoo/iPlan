@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checkable="true"
-                android:text="M"
+                android:text="@string/mTabItem"
                 android:textAlignment="center" />
 
             <com.google.android.material.chip.Chip
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checkable="true"
-                android:text="T"
+                android:text="@string/tueTabItem"
                 android:textAlignment="center" />
 
             <com.google.android.material.chip.Chip
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checkable="true"
-                android:text="W"
+                android:text="@string/wmTabItem"
                 android:textAlignment="center" />
 
             <com.google.android.material.chip.Chip
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checkable="true"
-                android:text="T"
+                android:text="@string/thuTabItem"
                 android:textAlignment="center" />
 
             <com.google.android.material.chip.Chip
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checkable="true"
-                android:text="F"
+                android:text="@string/fTabItem"
                 android:textAlignment="center" />
 
             <com.google.android.material.chip.Chip
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checkable="true"
-                android:text="S"
+                android:text="@string/satTabItem"
                 android:textAlignment="center"
                 android:textColor="#2196F3" />
 
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checkable="true"
-                android:text="S"
+                android:text="@string/sunTabItem"
                 android:textAlignment="center"
                 android:textColor="#E91E63" />
 
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Enter todo"
+                android:hint="@string/title_hint"
                 android:background="#00000000"
                 android:padding="20dp"
                 android:inputType="textPersonName" />

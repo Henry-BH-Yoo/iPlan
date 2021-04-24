@@ -105,13 +105,13 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
             endTimePicker.setHour(endHr);
             endTimePicker.setMinute(endMn);
 
-            chipMon.setChecked(todo.isMon);
-            chipTue.setChecked(todo.isTue);
-            chipWed.setChecked(todo.isWed);
-            chipThu.setChecked(todo.isThu);
-            chipFri.setChecked(todo.isFri);
-            chipSat.setChecked(todo.isSat);
-            chipSun.setChecked(todo.isSun);
+            chipMon.setChecked(todo.days == 1);
+            chipTue.setChecked(todo.days == 2);
+            chipWed.setChecked(todo.days == 3);
+            chipThu.setChecked(todo.days == 4);
+            chipFri.setChecked(todo.days == 5);
+            chipSat.setChecked(todo.days == 6);
+            chipSun.setChecked(todo.days == 7);
 
         } else if (!isEdit) {
             etxtTodo.setText("");
@@ -219,36 +219,105 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
                     validationOk = false;
                 }
 
-                if(validationOk) {
+
+                if (validationOk) {
                     if (isEdit) {
-                        Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
-                        updateTodo.setName(todoName);
-                        updateTodo.setHasAlarm(hasAlarm);
-                        updateTodo.setStartTime(startTime);
-                        updateTodo.setEndTime(endTime);
 
-                        updateTodo.setMon(cMon);
-                        updateTodo.setTue(cTue);
-                        updateTodo.setWed(cWed);
-                        updateTodo.setThu(cThu);
-                        updateTodo.setFri(cFri);
-                        updateTodo.setSat(cSat);
-                        updateTodo.setSun(cSun);
-
-                        TodoViewModel.update(updateTodo);
+                        //allows user to select only one dayChip
+                        if (cMon) {
+                            Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
+                            updateTodo.setName(todoName);
+                            updateTodo.setHasAlarm(hasAlarm);
+                            updateTodo.setStartTime(startTime);
+                            updateTodo.setEndTime(endTime);
+                            updateTodo.setDays(1);
+                            TodoViewModel.update(updateTodo);
+                        } else if (cTue) {
+                            Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
+                            updateTodo.setName(todoName);
+                            updateTodo.setHasAlarm(hasAlarm);
+                            updateTodo.setStartTime(startTime);
+                            updateTodo.setEndTime(endTime);
+                            updateTodo.setDays(2);
+                            TodoViewModel.update(updateTodo);
+                        } else if (cWed) {
+                            Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
+                            updateTodo.setName(todoName);
+                            updateTodo.setHasAlarm(hasAlarm);
+                            updateTodo.setStartTime(startTime);
+                            updateTodo.setEndTime(endTime);
+                            updateTodo.setDays(3);
+                            TodoViewModel.update(updateTodo);
+                        } else if (cThu) {
+                            Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
+                            updateTodo.setName(todoName);
+                            updateTodo.setHasAlarm(hasAlarm);
+                            updateTodo.setStartTime(startTime);
+                            updateTodo.setEndTime(endTime);
+                            updateTodo.setDays(4);
+                            TodoViewModel.update(updateTodo);
+                        } else if (cFri) {
+                            Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
+                            updateTodo.setName(todoName);
+                            updateTodo.setHasAlarm(hasAlarm);
+                            updateTodo.setStartTime(startTime);
+                            updateTodo.setEndTime(endTime);
+                            updateTodo.setDays(5);
+                            TodoViewModel.update(updateTodo);
+                        } else if (cSat) {
+                            Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
+                            updateTodo.setName(todoName);
+                            updateTodo.setHasAlarm(hasAlarm);
+                            updateTodo.setStartTime(startTime);
+                            updateTodo.setEndTime(endTime);
+                            updateTodo.setDays(6);
+                            TodoViewModel.update(updateTodo);
+                        } else if (cSun) {
+                            Todo updateTodo = sharedViewModel.getSelectedItem().getValue();
+                            updateTodo.setName(todoName);
+                            updateTodo.setHasAlarm(hasAlarm);
+                            updateTodo.setStartTime(startTime);
+                            updateTodo.setEndTime(endTime);
+                            updateTodo.setDays(7);
+                            TodoViewModel.update(updateTodo);
+                        }
                         sharedViewModel.setIsEdit(false);
                     } else {
-                        Todo todo = new Todo(todoName, false, hasAlarm, startTime, endTime);
-
-                        todo.setMon(cMon);
-                        todo.setTue(cTue);
-                        todo.setWed(cWed);
-                        todo.setThu(cThu);
-                        todo.setFri(cFri);
-                        todo.setSat(cSat);
-                        todo.setSun(cSun);
-
-                        TodoViewModel.insert(todo);
+                        if (cMon) {
+                            Todo todo = new Todo(todoName, false, hasAlarm, startTime, endTime);
+                            todo.setDays(1);
+                            TodoViewModel.insert(todo);
+                        }
+                        if (cTue) {
+                            Todo todo = new Todo(todoName, false, hasAlarm, startTime, endTime);
+                            todo.setDays(2);
+                            TodoViewModel.insert(todo);
+                        }
+                        if (cWed) {
+                            Todo todo = new Todo(todoName, false, hasAlarm, startTime, endTime);
+                            todo.setDays(3);
+                            TodoViewModel.insert(todo);
+                        }
+                        if (cThu) {
+                            Todo todo = new Todo(todoName, false, hasAlarm, startTime, endTime);
+                            todo.setDays(4);
+                            TodoViewModel.insert(todo);
+                        }
+                        if (cFri) {
+                            Todo todo = new Todo(todoName, false, hasAlarm, startTime, endTime);
+                            todo.setDays(5);
+                            TodoViewModel.insert(todo);
+                        }
+                        if (cSat) {
+                            Todo todo = new Todo(todoName, false, hasAlarm, startTime, endTime);
+                            todo.setDays(6);
+                            TodoViewModel.insert(todo);
+                        }
+                        if (cSun) {
+                            Todo todo = new Todo(todoName, false, hasAlarm, startTime, endTime);
+                            todo.setDays(7);
+                            TodoViewModel.insert(todo);
+                        }
                     }
                     etxtTodo.setText("");
                     swAlarm.setChecked(false);

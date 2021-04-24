@@ -56,5 +56,31 @@
     <string name="reset_btn"> RESET </string>
     <string name="save_btn"> SAVE </string>
 
+    <!-- Day tab -->
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+
+    <!-- Day tab items -->
+    <string name="mTabItem">M</string>
+    <string name="tueTabItem">T</string>
+    <string name="wmTabItem">W</string>
+    <string name="thuTabItem">T</string>
+    <string name="fTabItem">F</string>
+    <string name="satTabItem">S</string>
+    <string name="sunTabItem">S</string>
+
+    <string name="enter_contents_of_note">Enter contents of note</string>
+    <string name="start_time">Start Time</string>
+
+    <!-- Recycler view items -->
+    <string name="day_todo_name">Day Todo Name</string>
+    <string name="year_todo_name">Year Todo Name</string>
+
+
 </resources>
 

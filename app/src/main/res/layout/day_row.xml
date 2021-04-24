@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="4.8"
                 android:paddingStart="5dp"
-                android:hint="Start Time"
+                android:hint="@string/start_time"
                 android:textSize="16sp" />
 
 
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:hint="Day Todo Name"
+                android:hint="@string/day_todo_name"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
 

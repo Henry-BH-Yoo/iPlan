@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Enter todo"
+                android:hint="@string/title_hint"
                 android:background="#00000000"
                 android:padding="15dp"
                 android:inputType="textPersonName" />
@@ -37,47 +37,39 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/txtProgressYear"
-                android:layout_width="250dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:background="#00000000"
                 android:ems="10"
-                android:padding="15dp"
-                android:text="Progress"
+                android:padding="10dp"
+                android:text="@string/progress_type"
                 android:textSize="16dp" />
 
-            <EditText
-                android:id="@+id/etxtProgressYear"
+            <Spinner
+                android:id="@+id/spnProgressTypeYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="2 / 30"
-                android:background="#00000000"
-                android:padding="15dp"
-                android:inputType="textPersonName" />
+                android:layout_weight="3"
+                android:background="@null"
+                style="@style/DEFAULT_FONT_STYLE"
+                android:spinnerMode="dialog" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-            <TextView
-                android:id="@+id/txtNoteYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#00000000"
-                android:ems="10"
-                android:padding="15dp"
-                android:text="Note"
-                android:textSize="16dp" />
+            <include
+                android:id="@+id/goalLayoutYear"
+                layout="@layout/goal_layout_year" />
 
         </LinearLayout>
 
@@ -95,7 +87,7 @@
                 android:background="#4AD6D3D3"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Enter contents of note"
+                android:hint="@string/enter_contents_of_note"
                 android:inputType="textMultiLine"
                 android:padding="15dp" />
         </LinearLayout>

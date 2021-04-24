@@ -1,9 +1,13 @@
 package ca.on.conec.iplan.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
@@ -30,6 +34,9 @@ public class YearlyFragment extends Fragment implements OnTodoYearClickListener 
     public YearlyFragment() {
         // Required empty public constructor
     }
+
+    private Spinner spnYear;
+    String[] items = {"2021", "2022", "2023"};
 
     private TodoYearViewModel todoYearViewModel;
     private SharedYearViewModel sharedYearViewModel;
@@ -97,6 +104,27 @@ public class YearlyFragment extends Fragment implements OnTodoYearClickListener 
         fabYear.setOnClickListener(view ->
             showBottomSheetDialog()
         );
+
+        // Declare Spinner
+        spnYear = v.findViewById(R.id.spnYear);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                R.layout.spinner_item_year, items);
+
+        spnYear.setAdapter(adapter);
+        spnYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                String selectedItem = spnYear.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // No Action
+            }
+        });
+
 
         return v;
     }

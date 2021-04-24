@@ -4,14 +4,18 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import ca.on.conec.iplan.dao.TodoDao;
 import ca.on.conec.iplan.entity.Todo;
 
 public class iPlanRepository {
+
     private final TodoDao todoDao;
+
     private final LiveData<List<Todo>> allTodos;
+
 
     public iPlanRepository(Application application) {
         AppDatabase database = AppDatabase.getAppDatabase(application);
@@ -26,6 +30,17 @@ public class iPlanRepository {
     public LiveData<Todo> get(long id) {
         return todoDao.get(id);
     }
+
+
+    public LiveData<List<Todo>> getTodosWithAlarm(LocalTime startTime, LocalTime hrLaterTime, int days) {
+        return todoDao.getTodosWithAlarm(startTime, hrLaterTime, days);
+    }
+//    public List<Todo> getTodosWithAlarm(LocalTime startTime, LocalTime hrLaterTime, int days) {
+//        return todoDao.getTodosWithAlarm(startTime, hrLaterTime, days);
+//    }
+
+
+
 
     public void insert(Todo todo) {
         AppDatabase.databaseWriterExecutor.execute( () -> todoDao.insertTodo(todo));

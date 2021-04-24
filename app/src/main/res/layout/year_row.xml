@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Year Todo Name"
+                android:hint="@string/year_todo_name"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
 

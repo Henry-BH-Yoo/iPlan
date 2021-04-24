@@ -30,26 +30,33 @@ public class Todo {
     @ColumnInfo(name = "end_time")
     public LocalTime endTime; // Day
 
-    @ColumnInfo(name = "is_mon")
-    public boolean isMon;
 
-    @ColumnInfo(name = "is_tue")
-    public boolean isTue;
 
-    @ColumnInfo(name = "is_wed")
-    public boolean isWed;
+//    @ColumnInfo(name = "is_mon")
+//    public boolean isMon;
+//
+//    @ColumnInfo(name = "is_tue")
+//    public boolean isTue;
+//
+//    @ColumnInfo(name = "is_wed")
+//    public boolean isWed;
+//
+//    @ColumnInfo(name = "is_thu")
+//    public boolean isThu;
+//
+//    @ColumnInfo(name = "is_fri")
+//    public boolean isFri;
+//
+//    @ColumnInfo(name = "is_sat")
+//    public boolean isSat;
+//
+//    @ColumnInfo(name = "is_sun")
+//    public boolean isSun;
 
-    @ColumnInfo(name = "is_thu")
-    public boolean isThu;
 
-    @ColumnInfo(name = "is_fri")
-    public boolean isFri;
 
-    @ColumnInfo(name = "is_sat")
-    public boolean isSat;
+    public int days;
 
-    @ColumnInfo(name = "is_sun")
-    public boolean isSun;
 
 
     // it is for day_todo

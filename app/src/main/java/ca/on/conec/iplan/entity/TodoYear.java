@@ -18,8 +18,6 @@ public class TodoYear {
 
 
 
-    //todo add xml for these 3
-
     @ColumnInfo(name = "progress_Type")
     public String progressType;
 

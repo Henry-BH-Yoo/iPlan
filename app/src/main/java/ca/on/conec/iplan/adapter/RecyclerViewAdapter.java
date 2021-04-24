@@ -18,7 +18,6 @@ import java.util.List;
 import ca.on.conec.iplan.R;
 import ca.on.conec.iplan.database.LocalTimeConverter;
 import ca.on.conec.iplan.entity.Todo;
-import ca.on.conec.iplan.viewmodel.TodoViewModel;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements ItemTouchHelperListener {
 

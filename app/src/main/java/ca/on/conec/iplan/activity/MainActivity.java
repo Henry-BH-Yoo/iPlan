@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import ca.on.conec.iplan.NotificationService;
 import ca.on.conec.iplan.R;
 import ca.on.conec.iplan.fragment.BucketListFragment;
 import ca.on.conec.iplan.fragment.DailyFragment;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_IPlan);
+
+//        startService(new Intent(getApplicationContext(), NotificationService.class));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -104,5 +107,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // For Local Notification Service
+    @Override
+    protected void onStop() {
 
+        // MOVED TO onCreate
+        startService(new Intent(getApplicationContext(), NotificationService.class));
+        super.onStop();
+    }
 }

@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import ca.on.conec.iplan.entity.Todo;
@@ -25,6 +26,15 @@ public interface TodoDao {
 
     @Query("SELECT * FROM todo_table WHERE todo_table.todo_id == :id")
     LiveData<Todo> get(long id);
+
+
+
+    @Query("SELECT * FROM todo_table WHERE todo_table.has_alarm == 1 AND todo_table.days == :days AND (todo_table.start_time BETWEEN :startTime AND :hrLaterTime)")
+    LiveData<List<Todo>> getTodosWithAlarm(LocalTime startTime, LocalTime hrLaterTime, int days);
+//    @Query("SELECT * FROM todo_table WHERE has_alarm == 1 AND days == :days AND start_time BETWEEN :startTime AND :hrLaterTime")
+//    List<Todo> getTodosWithAlarm(LocalTime startTime, LocalTime hrLaterTime, int days);
+
+
 
     @Update
     void update(Todo todo);
