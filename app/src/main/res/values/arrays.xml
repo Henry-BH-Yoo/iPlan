@@ -16,10 +16,5 @@
         <item> Money </item>
     </string-array>
 
-    <string-array name="textSize">
-        <item> 12sp </item>
-        <item> 14sp </item>
-        <item> 16sp </item>
-    </string-array>
 
 </resources>

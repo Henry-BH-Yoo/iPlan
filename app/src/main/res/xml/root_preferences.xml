@@ -1,4 +1,5 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
@@ -7,6 +8,23 @@
             android:defaultValue="false"
             android:key="darkAppTheme"
             android:title="@string/dark_theme_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/privacy_header">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pwCheck"
+            android:title="@string/privacy_title" />
+
+        <EditTextPreference
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:defaultValue=""
+            android:summary="@string/privacy_edt_hint"
+            android:key="edtPassword"
+            android:selectAllOnFocus="true"
+            android:title="@string/password"
+            android:singleLine="true" />
     </PreferenceCategory>
 
 </PreferenceScreen>
