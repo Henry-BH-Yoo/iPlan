@@ -38,8 +38,6 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
         // Required empty public constructor
     }
 
-    //todo change dark theme on 2 bottom sheet
-
     private TodoViewModel todoViewModel;
     private SharedViewModel sharedViewModel;
 

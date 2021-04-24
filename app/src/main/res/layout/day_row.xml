@@ -42,7 +42,7 @@
                 android:id="@+id/imgBtnHasAlarm"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="5.4"
+                android:layout_weight="5.5"
                 android:background="#00FFFFFF"
                 android:visibility="invisible"
                 app:srcCompat="@drawable/new_ic_alarm" />
@@ -51,7 +51,8 @@
                 android:id="@+id/chkIsDone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5.5" />
+                android:layout_weight="5.9"
+                android:buttonTint="@color/teal_700" />
 
         </LinearLayout>
 
