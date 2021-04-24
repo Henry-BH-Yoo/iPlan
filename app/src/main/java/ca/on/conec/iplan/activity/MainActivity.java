@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.bottom_tab_life:
                         menuNumber = 4;
                         fragment = new BucketListFragment();
+                        actionBar.setTitle("Bucket List");
                         break;
                 }
 

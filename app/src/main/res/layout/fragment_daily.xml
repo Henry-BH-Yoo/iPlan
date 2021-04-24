@@ -14,7 +14,8 @@
         app:tabIndicatorColor="#00BCD4"
         app:tabPaddingEnd="10dp"
         app:tabPaddingStart="10dp"
-        app:tabTextColor="#323232">
+        app:tabBackground="?attr/colorPrimary"
+        app:tabTextColor="?attr/colorOnPrimary">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

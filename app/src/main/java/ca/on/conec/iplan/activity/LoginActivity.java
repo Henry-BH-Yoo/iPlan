@@ -6,11 +6,13 @@ import androidx.preference.PreferenceManager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -51,11 +53,8 @@ public class LoginActivity extends AppCompatActivity {
 
         isUsePassword = sharedPref.getBoolean("pwCheck" , false);
         password = sharedPref.getString("edtPassword" , "");
-
-        Log.d("DEBUG" , "isUsePassword : " + isUsePassword);
-        Log.d("DEBUG" , "password : " + password);
-
-
+        
+        edtPassword.requestFocus();
 
         if(isUsePassword && !"".equals(password)) {
             // Password Check
