@@ -6,27 +6,27 @@
         app:showAsAction="always"
         android:enabled="true"
         android:checked="true"
-        android:icon="@drawable/ic_daily"
+        android:icon="@drawable/new_ic_day"
         android:title="@string/menu_daily" />
 
     <item android:id="@+id/bottom_tab_monthly"
        app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/ic_monthly"
+        android:icon="@drawable/new_ic_month"
         android:title="@string/menu_monthly"
         />
 
     <item android:id="@+id/bottom_tab_year"
         app:showAsAction="always"
         android:enabled="true"
-        android:icon="@drawable/ic_yearly"
+        android:icon="@drawable/new_ic_year"
         android:title="@string/menu_year"/>
 
     <item
         android:id="@+id/bottom_tab_life"
         android:enabled="true"
         app:showAsAction="always"
-        android:icon="@drawable/ic_bucketlist"
+        android:icon="@drawable/new_ic_bucket"
         android:title="@string/menu_life"
         />
 </menu>

@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
         setAppTheme();
 
-//        startService(new Intent(getApplicationContext(), NotificationService.class));
+        // Start Local Notification
+        startService(new Intent(getApplicationContext(), NotificationService.class));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -178,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
 
-        // MOVED TO onCreate
-        startService(new Intent(getApplicationContext(), NotificationService.class));
+        // MOVE to onCreate?
+//        startService(new Intent(getApplicationContext(), NotificationService.class));
         super.onStop();
     }
 }

@@ -5,7 +5,7 @@
 
     <item android:id="@+id/top_setting"
         app:showAsAction="always"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/new_ic_setting"
         android:title="@string/menu_settings" />
 
 </menu>

@@ -34,9 +34,6 @@ public class TodoViewModel extends AndroidViewModel {
     public LiveData<List<Todo>> getTodosWithAlarm(String startTime, String hrLaterTime, int days) {
         return repository.getTodosWithAlarm(startTime, hrLaterTime, days);
     }
-//    public List<Todo> getTodosWithAlarm(LocalTime startTime, LocalTime hrLaterTime, int days) {
-//        return repository.getTodosWithAlarm(startTime, hrLaterTime, days);
-//    }
 
 
     public LiveData<Todo> get(long id) {
