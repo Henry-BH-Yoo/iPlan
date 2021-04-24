@@ -37,7 +37,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.room:room-runtime:2.2.6"
-    implementation 'org.projectlombok:lombok'
     implementation 'org.projectlombok:lombok:1.18.12'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'com.github.prolificinteractive:material-calendarview:1.6.1'
@@ -46,5 +45,4 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
 }

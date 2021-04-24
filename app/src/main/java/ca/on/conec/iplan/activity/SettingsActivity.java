@@ -3,16 +3,25 @@ package ca.on.conec.iplan.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreference;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import ca.on.conec.iplan.R;
 
@@ -60,6 +69,61 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+            SwitchPreference swPref = (SwitchPreference) findPreference("pwCheck");
+            EditTextPreference edtPref = (EditTextPreference) findPreference("edtPassword");
+
+            if(swPref.isChecked()) {
+                edtPref.setVisible(true);
+
+                if(!"".equals(edtPref.getText())) {
+                    edtPref.setTitle("****");
+                } else {
+                    edtPref.setTitle("");
+                }
+            } else {
+                edtPref.setVisible(false);
+                edtPref.setText("");
+            }
+
+
+            swPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                    if(Boolean.parseBoolean(newValue.toString())) {
+                        edtPref.setVisible(true);
+                    } else {
+                        edtPref.setVisible(false);
+                        edtPref.setText("");
+                    }
+
+                    return true;
+                }
+            });
+
+            edtPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    String newStr = newValue.toString();
+
+                    if(newStr.length() < 4) {
+                        return false;
+                    } else {
+                        preference.setTitle("****");
+                        return true;
+                    }
+                }
+            });
+
+            edtPref.setOnBindEditTextListener(new EditTextPreference.OnBindEditTextListener() {
+                @Override
+                public void onBindEditText(@NonNull EditText editText) {
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                    editText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(4) });
+                }
+            });
+
         }
     }
 

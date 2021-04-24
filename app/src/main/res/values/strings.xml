@@ -89,7 +89,16 @@
     <string name="dark_theme_header">Appearance</string>
     <string name="dark_theme_title">Dark theme</string>
 
-    <string name="text_size_header">Text Size</string>
+    <string name="privacy_header">Privacy</string>
+    <string name="privacy_title">Use Password</string>
+    <string name="password">****</string>
+    <string name="privacy_edt_hint">Enter 4 digits</string>
+
+
+    <string name="enter_password">Enter your password</string>
+
+    <string name="login">Login</string>
+    <string name="exit">Exit</string>
 
 </resources>
 
