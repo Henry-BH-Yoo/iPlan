@@ -19,11 +19,6 @@
             android:background="@drawable/border_bottom"
             android:padding="8dp">
 
-            <RadioButton
-                android:id="@+id/rdoDayRow"
-                android:layout_width="26dp"
-                android:layout_height="match_parent" />
-
             <TextView
                 android:id="@+id/txtDayStartTime"
                 android:layout_width="match_parent"
@@ -48,9 +43,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5.4"
-                android:background="#FFFFFF"
+                android:background="#00FFFFFF"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/baseline_alarm_black_24dp" />
+                app:srcCompat="@drawable/new_ic_alarm" />
 
             <CheckBox
                 android:id="@+id/chkIsDone"

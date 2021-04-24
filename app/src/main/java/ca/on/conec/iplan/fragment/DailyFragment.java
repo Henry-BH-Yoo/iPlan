@@ -38,6 +38,8 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
         // Required empty public constructor
     }
 
+    //todo change dark theme on 2 bottom sheet
+
     private TodoViewModel todoViewModel;
     private SharedViewModel sharedViewModel;
 
@@ -256,17 +258,6 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
     }
 
     @Override
-    public void onTodoRadioBtnClick(Todo todo) {
-        Log.d("My", "onRadioBtnClick: " + todo.getName());
-
-        // replacing swipe to delete
-//        TodoViewModel.delete(todo);
-
-        // it will refresh RecyclerView
-        recyclerViewAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void onTodoIsDoneChkClick(Todo todo) {
         Log.d("My", "onChkboxClick: " + todo.getName());
 
@@ -275,6 +266,5 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
 
         // it will refresh RecyclerView
         recyclerViewAdapter.notifyDataSetChanged();
-
     }
 }

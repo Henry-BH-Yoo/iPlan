@@ -17,7 +17,7 @@ public class LocalTimeConverter  {
         if (timeString == null) {
             return null;
         } else {
-            return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:m"));
+            return LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
         }
     }
 
@@ -27,7 +27,7 @@ public class LocalTimeConverter  {
         if (time == null) {
             return null;
         } else {
-            return time.format(DateTimeFormatter.ofPattern("HH:m")); // ex 22:40 or 07:01?
+            return time.format(DateTimeFormatter.ofPattern("HH:mm")); // ex 22:40 or 07:01?
         }
     }
 }

@@ -34,7 +34,6 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
 
     private EditText etxtTodo;
     private Button btnSaveTodo, btnResetDay;
-    private RadioButton rdoSelectedTodo;
     private Switch swAlarm;
     private Chip chipMon, chipTue, chipWed, chipThu, chipFri, chipSat, chipSun;
 
@@ -58,8 +57,6 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
         btnSaveTodo = view.findViewById(R.id.btnSaveDay);
         btnResetDay = view.findViewById(R.id.btnResetDay);
         swAlarm = view.findViewById(R.id.swAlarm);
-
-        rdoSelectedTodo = view.findViewById(R.id.rdoDayRow);
 
         chipMon = view.findViewById(R.id.chipMon);
         chipTue = view.findViewById(R.id.chipTue);
@@ -146,9 +143,16 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
 
 
         startTimePicker.setOnTimeChangedListener((view1, hourOfDay, minute) -> {
-            if (hourOfDay < 10) {
+            if (hourOfDay < 10 && minute < 10) {
+                String newHr = "0" + hourOfDay;
+                String newMin = "0" + minute;
+                startTimeStr = newHr + ":" + newMin;
+            } else if (hourOfDay < 10 && minute >= 10) {
                 String newHour = "0" + hourOfDay;
                 startTimeStr = newHour + ":" + minute;
+            } else if (hourOfDay > 10 && minute < 10) {
+                String newMin = "0" + minute;
+                startTimeStr = hourOfDay + ":" + newMin;
             } else {
                 startTimeStr = hourOfDay + ":" + minute;
             }
@@ -156,9 +160,16 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
         Log.d("DEBUG" , "startTimeStr : " + startTimeStr);
 
         endTimePicker.setOnTimeChangedListener((view1, hourOfDay, minute) -> {
-            if (hourOfDay < 10) {
+            if (hourOfDay < 10 && minute < 10) {
+                String newHr = "0" + hourOfDay;
+                String newMin = "0" + minute;
+                endTimeStr = newHr + ":" + newMin;
+            } else if (hourOfDay < 10 && minute >= 10) {
                 String newHour = "0" + hourOfDay;
                 endTimeStr = newHour + ":" + minute;
+            } else if (hourOfDay > 10 && minute < 10) {
+                String newMin = "0" + minute;
+                endTimeStr = hourOfDay + ":" + newMin;
             } else {
                 endTimeStr = hourOfDay + ":" + minute;
             }

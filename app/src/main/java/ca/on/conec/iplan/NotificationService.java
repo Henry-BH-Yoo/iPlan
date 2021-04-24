@@ -106,7 +106,7 @@ public class NotificationService extends Service {
 
                 todosWithAlarm.forEach(a -> {
                     final Notification notification = new Notification.Builder(getApplicationContext(), "notiChannel")
-                            .setSmallIcon(R.drawable.baseline_alarm_black_24dp)
+                            .setSmallIcon(R.drawable.new_ic_alarm)
                             .setContentTitle(a.name + " at " + LocalTimeConverter.toTimeString(a.startTime))
                             .setContentText("Tap to open the iPlan")
                             .setAutoCancel(true)

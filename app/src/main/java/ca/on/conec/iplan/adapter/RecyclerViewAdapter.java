@@ -66,7 +66,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        public AppCompatRadioButton radioButton;
         public AppCompatTextView dayTodo;
         public AppCompatTextView dayStartTime;
         public AppCompatCheckBox checkBox;
@@ -77,7 +76,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            radioButton = itemView.findViewById(R.id.rdoDayRow);
             checkBox = itemView.findViewById(R.id.chkIsDone);
 
             dayTodo = itemView.findViewById(R.id.txtDayRow);
@@ -87,7 +85,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             this.onTodoClickListener = todoClickListener;
 
             itemView.setOnClickListener(this);
-            radioButton.setOnClickListener(this);
             checkBox.setOnClickListener(this);
         }
 
@@ -100,8 +97,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             if (id == R.id.day_row_layout) {
                 // OnTodoClickListener Interface can delegate this information to whoever implements it
                 onTodoClickListener.onTodoClick(currentTodo);
-            } else if (id == R.id.rdoDayRow) {
-                onTodoClickListener.onTodoRadioBtnClick(currentTodo);
             } else if (id == R.id.chkIsDone) {
                 onTodoClickListener.onTodoIsDoneChkClick(currentTodo);
             }
