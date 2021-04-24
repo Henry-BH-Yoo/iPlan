@@ -3,6 +3,7 @@ package ca.on.conec.iplan.fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,6 +153,7 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
                 startTimeStr = hourOfDay + ":" + minute;
             }
         });
+        Log.d("DEBUG" , "startTimeStr : " + startTimeStr);
 
         endTimePicker.setOnTimeChangedListener((view1, hourOfDay, minute) -> {
             if (hourOfDay < 10) {
@@ -283,6 +285,7 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
                         }
                         sharedViewModel.setIsEdit(false);
                     } else {
+                        // Insert, not Update
                         if (cMon) {
                             Todo todo = new Todo(todoName, false, hasAlarm, startTime, endTime);
                             todo.setDays(1);

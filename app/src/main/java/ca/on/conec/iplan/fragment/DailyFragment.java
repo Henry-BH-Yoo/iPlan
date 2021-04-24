@@ -20,6 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -94,23 +95,15 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
         TabLayout tabs = v.findViewById(R.id.tabs);
 
 
-        // show only Mon by default at initial load
-        if (tabs.getSelectedTabPosition() == 0) {
-            todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-                allDayTodos = todos;
+        // get day of week
+        LocalDateTime now = LocalDateTime.now();
+        int days = now.getDayOfWeek().getValue();
 
-                onlyMonTodos = allDayTodos.stream().filter(a -> a.days == 1).collect(Collectors.toList());
+        tabs.selectTab(tabs.getTabAt(days - 1));
 
-                // Attach RecyclerView Adapter
-                recyclerViewAdapter = new RecyclerViewAdapter(onlyMonTodos, todoClickListener);
-                recyclerView.setAdapter(recyclerViewAdapter);
+        int selectedTabPosition = tabs.getSelectedTabPosition();
+        selectDayAdapter(selectedTabPosition);
 
-                //todo swipe delete
-                // when swipe from right to left, ERROR of array null
-                mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                mItemTouchHelper.attachToRecyclerView(recyclerView);
-            });
-        }
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -119,106 +112,7 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
                 // Process tab selection event
                 int position = tab.getPosition();
 
-                switch (position) {
-                    case 0: // Mon
-                        todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-                            allDayTodos = todos;
-
-                            onlyMonTodos = allDayTodos.stream().filter(a -> a.days == 1).collect(Collectors.toList());
-
-                            // Attach RecyclerView Adapter
-                            recyclerViewAdapter = new RecyclerViewAdapter(onlyMonTodos, todoClickListener);
-                            recyclerView.setAdapter(recyclerViewAdapter);
-
-                            mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                            mItemTouchHelper.attachToRecyclerView(recyclerView);
-                        });
-                        break;
-                    case 1: // Tue
-                        todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-                            allDayTodos = todos;
-
-                            onlyTueTodos = allDayTodos.stream().filter(a -> a.days == 2).collect(Collectors.toList());
-
-                            // Attach RecyclerView Adapter
-                            recyclerViewAdapter = new RecyclerViewAdapter(onlyTueTodos, todoClickListener);
-                            recyclerView.setAdapter(recyclerViewAdapter);
-
-                            mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                            mItemTouchHelper.attachToRecyclerView(recyclerView);
-                        });
-                        break;
-                    case 2: // Wed
-                        todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-                            allDayTodos = todos;
-
-                            onlyWedTodos = allDayTodos.stream().filter(a -> a.days == 3).collect(Collectors.toList());
-
-                            // Attach RecyclerView Adapter
-                            recyclerViewAdapter = new RecyclerViewAdapter(onlyWedTodos, todoClickListener);
-                            recyclerView.setAdapter(recyclerViewAdapter);
-
-                            mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                            mItemTouchHelper.attachToRecyclerView(recyclerView);
-                        });
-                        break;
-                    case 3: // Thu
-                        todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-                            allDayTodos = todos;
-
-                            onlyThuTodos = allDayTodos.stream().filter(a -> a.days == 4).collect(Collectors.toList());
-
-                            // Attach RecyclerView Adapter
-                            recyclerViewAdapter = new RecyclerViewAdapter(onlyThuTodos, todoClickListener);
-                            recyclerView.setAdapter(recyclerViewAdapter);
-
-                            mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                            mItemTouchHelper.attachToRecyclerView(recyclerView);
-                        });
-                        break;
-                    case 4: // Fri
-                        todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-                            allDayTodos = todos;
-
-                            onlyFriTodos = allDayTodos.stream().filter(a -> a.days == 5).collect(Collectors.toList());
-
-                            // Attach RecyclerView Adapter
-                            recyclerViewAdapter = new RecyclerViewAdapter(onlyFriTodos, todoClickListener);
-                            recyclerView.setAdapter(recyclerViewAdapter);
-
-                            mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                            mItemTouchHelper.attachToRecyclerView(recyclerView);
-                        });
-                        break;
-                    case 5: // Sat
-                        todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-                            allDayTodos = todos;
-
-                            onlySatTodos = allDayTodos.stream().filter(a -> a.days == 6).collect(Collectors.toList());
-
-                            // Attach RecyclerView Adapter
-                            recyclerViewAdapter = new RecyclerViewAdapter(onlySatTodos, todoClickListener);
-                            recyclerView.setAdapter(recyclerViewAdapter);
-
-                            mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                            mItemTouchHelper.attachToRecyclerView(recyclerView);
-                        });
-                        break;
-                    case 6: // Sun
-                        todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
-                            allDayTodos = todos;
-
-                            onlySunTodos = allDayTodos.stream().filter(a -> a.days == 7).collect(Collectors.toList());
-
-                            // Attach RecyclerView Adapter
-                            recyclerViewAdapter = new RecyclerViewAdapter(onlySunTodos, todoClickListener);
-                            recyclerView.setAdapter(recyclerViewAdapter);
-
-                            mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                            mItemTouchHelper.attachToRecyclerView(recyclerView);
-                        });
-                        break;
-                }
+                selectDayAdapter(position);
             }
 
             @Override
@@ -240,6 +134,110 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
         });
 
         return v;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void selectDayAdapter(int position) {
+        switch (position) {
+            case 0: // Mon
+                todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
+                    allDayTodos = todos;
+
+                    onlyMonTodos = allDayTodos.stream().filter(a -> a.days == 1).collect(Collectors.toList());
+
+                    // Attach RecyclerView Adapter
+                    recyclerViewAdapter = new RecyclerViewAdapter(onlyMonTodos, todoClickListener);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+
+                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+                });
+                break;
+            case 1: // Tue
+                todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
+                    allDayTodos = todos;
+
+                    onlyTueTodos = allDayTodos.stream().filter(a -> a.days == 2).collect(Collectors.toList());
+
+                    // Attach RecyclerView Adapter
+                    recyclerViewAdapter = new RecyclerViewAdapter(onlyTueTodos, todoClickListener);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+
+                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+                });
+                break;
+            case 2: // Wed
+                todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
+                    allDayTodos = todos;
+
+                    onlyWedTodos = allDayTodos.stream().filter(a -> a.days == 3).collect(Collectors.toList());
+
+                    // Attach RecyclerView Adapter
+                    recyclerViewAdapter = new RecyclerViewAdapter(onlyWedTodos, todoClickListener);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+
+                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+                });
+                break;
+            case 3: // Thu
+                todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
+                    allDayTodos = todos;
+
+                    onlyThuTodos = allDayTodos.stream().filter(a -> a.days == 4).collect(Collectors.toList());
+
+                    // Attach RecyclerView Adapter
+                    recyclerViewAdapter = new RecyclerViewAdapter(onlyThuTodos, todoClickListener);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+
+                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+                });
+                break;
+            case 4: // Fri
+                todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
+                    allDayTodos = todos;
+
+                    onlyFriTodos = allDayTodos.stream().filter(a -> a.days == 5).collect(Collectors.toList());
+
+                    // Attach RecyclerView Adapter
+                    recyclerViewAdapter = new RecyclerViewAdapter(onlyFriTodos, todoClickListener);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+
+                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+                });
+                break;
+            case 5: // Sat
+                todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
+                    allDayTodos = todos;
+
+                    onlySatTodos = allDayTodos.stream().filter(a -> a.days == 6).collect(Collectors.toList());
+
+                    // Attach RecyclerView Adapter
+                    recyclerViewAdapter = new RecyclerViewAdapter(onlySatTodos, todoClickListener);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+
+                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+                });
+                break;
+            case 6: // Sun
+                todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
+                    allDayTodos = todos;
+
+                    onlySunTodos = allDayTodos.stream().filter(a -> a.days == 7).collect(Collectors.toList());
+
+                    // Attach RecyclerView Adapter
+                    recyclerViewAdapter = new RecyclerViewAdapter(onlySunTodos, todoClickListener);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+
+                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+                });
+                break;
+        }
     }
 
     private void showBottomSheetDialog() {
