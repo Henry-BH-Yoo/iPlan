@@ -1,6 +1,8 @@
 package ca.on.conec.iplan.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,13 +55,19 @@ public class YearlyFragment extends Fragment implements OnTodoYearClickListener 
     OnTodoYearClickListener todoYearClickListener;
 
     private ItemTouchHelper mItemTouchHelper;
-
+    private SharedPreferences sharedPref;
+    private boolean isDarkAppTheme;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_yearly, container, false);
+
+
+        PreferenceManager.setDefaultValues(v.getContext(), R.xml.root_preferences, false);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+
 
         // Connect a Bottom sheet to create and edit yearTodo
         bottomSheetYearFragment = new BottomSheetYearFragment();
@@ -116,6 +126,17 @@ public class YearlyFragment extends Fragment implements OnTodoYearClickListener 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 String selectedItem = spnYear.getItemAtPosition(position).toString();
+
+                isDarkAppTheme = sharedPref.getBoolean("darkAppTheme", false);
+
+                try {
+                    if (isDarkAppTheme) {
+                        ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                    }
+                } catch(Exception e) {
+
+                }
+
             }
 
             @Override

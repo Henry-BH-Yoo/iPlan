@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -101,12 +102,13 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Vi
      */
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
+        public ImageButton deleteBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title = (TextView) itemView.findViewById(R.id.list_title);
-
+            deleteBtn = (ImageButton) itemView.findViewById(R.id.deleteBtn);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,6 +119,27 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Vi
                     }
                 }
             });
+
+            title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION) {
+                        bListener.onItemClick(v, bucketList.get(pos).bucketId);
+                    }
+                }
+            });
+
+            deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION) {
+                        bListener.onDeleteBtnClick(v, bucketList.get(pos));
+                    }
+                }
+            });
+
 
         }
 
@@ -139,6 +162,7 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Vi
      */
     public interface OnItemClickListener {
         void onItemClick(View v, int bucketId);
+        void onDeleteBtnClick(View v , BucketList bucket);
     }
 
     /**
@@ -148,6 +172,9 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Vi
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.bListener = listener;
     }
+
+
+
 
 }
 

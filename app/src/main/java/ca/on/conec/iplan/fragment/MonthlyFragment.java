@@ -147,9 +147,6 @@ public class MonthlyFragment extends Fragment {
             getPlanByDay(selectedDate);
         });
 
-
-        Log.d("DEBUG" , ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + currentMonth);
-
         getPlanByMonth(currentMonth);
 
         return v;
@@ -187,7 +184,6 @@ public class MonthlyFragment extends Fragment {
     }
 
     private void getPlanByMonth(String currentMonth) {
-        Log.d("DEBUG" , ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> currentMonth :::::::::::::" + currentMonth);
 
         monthlyPlanViewModel.findByMonth(currentMonth).observe(getViewLifecycleOwner(),  mPlanList -> {
             materialCalendarView.removeDecorator(eventDecorator);
@@ -225,9 +221,16 @@ public class MonthlyFragment extends Fragment {
         mPlanListAdapter.setOnItemClickListener(new MPlanListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, String selectedDate, int mPlanId) {
-                Log.d("DEBUG" , ">>>>>>>" + selectedDate);
-                Log.d("DEBUG" , ">>>>>>>" + mPlanId);
                 showBottomSheetDialog(selectedDate , mPlanId);
+            }
+
+            @Override
+            public void onDeleteBtnClick(View v, MonthlyPlan mPlan) {
+                try {
+                    MonthlyPlanViewModel.delete(mPlan);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 

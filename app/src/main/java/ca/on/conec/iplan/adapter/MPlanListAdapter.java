@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -90,12 +91,13 @@ public class MPlanListAdapter extends RecyclerView.Adapter<MPlanListAdapter.View
      */
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
+        public ImageButton deleteBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title = (TextView) itemView.findViewById(R.id.list_title);
-
+            deleteBtn = (ImageButton) itemView.findViewById(R.id.deleteBtn);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -103,6 +105,26 @@ public class MPlanListAdapter extends RecyclerView.Adapter<MPlanListAdapter.View
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION) {
                         bListener.onItemClick(v, mPlanList.get(pos).mPlanDate , mPlanList.get(pos).mPlanId);
+                    }
+                }
+            });
+
+            title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION) {
+                        bListener.onItemClick(v, mPlanList.get(pos).mPlanDate , mPlanList.get(pos).mPlanId);
+                    }
+                }
+            });
+
+            deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION) {
+                        bListener.onDeleteBtnClick(v, mPlanList.get(pos));
                     }
                 }
             });
@@ -121,6 +143,7 @@ public class MPlanListAdapter extends RecyclerView.Adapter<MPlanListAdapter.View
      */
     public interface OnItemClickListener {
         void onItemClick(View v, String selectedDate , int mPlanId);
+        void onDeleteBtnClick(View v , MonthlyPlan mPlan);
     }
 
     /**

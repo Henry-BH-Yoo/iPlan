@@ -10,185 +10,188 @@
     app:behavior_peekHeight="500dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
+        >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipMon"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checkable="true"
-                android:text="@string/mTabItem"
-                android:textAlignment="center" />
+                android:orientation="horizontal">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipTue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checkable="true"
-                android:text="@string/tueTabItem"
-                android:textAlignment="center" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checkable="true"
+                    android:text="@string/mTabItem"
+                    android:textAlignment="center" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipWed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checkable="true"
-                android:text="@string/wmTabItem"
-                android:textAlignment="center" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipTue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checkable="true"
+                    android:text="@string/tueTabItem"
+                    android:textAlignment="center" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipThu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checkable="true"
-                android:text="@string/thuTabItem"
-                android:textAlignment="center" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipWed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checkable="true"
+                    android:text="@string/wmTabItem"
+                    android:textAlignment="center" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipFri"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checkable="true"
-                android:text="@string/fTabItem"
-                android:textAlignment="center" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipThu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checkable="true"
+                    android:text="@string/thuTabItem"
+                    android:textAlignment="center" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checkable="true"
-                android:text="@string/satTabItem"
-                android:textAlignment="center"
-                android:textColor="#2196F3" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFri"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checkable="true"
+                    android:text="@string/fTabItem"
+                    android:textAlignment="center" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSun"
-                android:layout_width="wrap_content"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checkable="true"
+                    android:text="@string/satTabItem"
+                    android:textAlignment="center"
+                    android:textColor="#2196F3" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checkable="true"
+                    android:text="@string/sunTabItem"
+                    android:textAlignment="center"
+                    android:textColor="#E91E63" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:checkable="true"
-                android:text="@string/sunTabItem"
-                android:textAlignment="center"
-                android:textColor="#E91E63" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etxtDayTodo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/title_hint"
+                    android:background="#00000000"
+                    android:padding="20dp"
+                    android:inputType="textPersonName" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etxtStartTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:textAlignment="center"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:padding="20dp"
+                    />
+
+                <EditText
+                    android:id="@+id/etxtEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:padding="20dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/txtAlarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:text="Alarm" />
+
+                <Switch
+                    android:id="@+id/swAlarm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <Button
+                    android:id="@+id/btnResetDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/reset_btn"
+                    android:layout_marginRight="10dp"
+                    />
+
+                <Button
+                    android:id="@+id/btnSaveDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/save_btn"
+                    android:layout_marginLeft="10dp"
+                    />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/etxtDayTodo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="@string/title_hint"
-                android:background="#00000000"
-                android:padding="20dp"
-                android:inputType="textPersonName" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/etxtStartTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:focusable="false"
-                android:clickable="true"
-                android:textAlignment="center"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="20dp"
-                />
-
-            <EditText
-                android:id="@+id/etxtEndTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:focusable="false"
-                android:clickable="true"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:padding="20dp"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
-            <TextView
-                android:id="@+id/txtAlarm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="16sp"
-                android:text="Alarm" />
-
-            <Switch
-                android:id="@+id/swAlarm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="20dp">
-
-            <Button
-                android:id="@+id/btnResetDay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/reset_btn"
-                android:layout_marginRight="10dp"
-                />
-
-            <Button
-                android:id="@+id/btnSaveDay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/save_btn"
-                android:layout_marginLeft="10dp"
-                />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
+    </ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

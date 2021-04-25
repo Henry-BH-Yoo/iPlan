@@ -1,12 +1,15 @@
 package ca.on.conec.iplan.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.snackbar.Snackbar;
@@ -28,7 +32,7 @@ import ca.on.conec.iplan.viewmodel.BucketListViewModel;
 public class BottomSheetBucketFragment extends BottomSheetDialogFragment {
     private Spinner spnProgressType;
 
-    private EditText edtBucketTitle , edtCurrentStatus , edtGoal , edtTargetAge;
+    private EditText edtBucketTitle , edtCurrentStatus , edtGoal , edtTargetAge , spnTarget;
     private Button resetBtn , saveBtn;
 
     private String selectedProgressType = "Quantity";
@@ -36,15 +40,26 @@ public class BottomSheetBucketFragment extends BottomSheetDialogFragment {
     private static int bucketId = 0;
     private boolean updateYn;
     private BucketList bucket;
+
+    private SharedPreferences sharedPref;
+    private boolean isDarkAppTheme;
+
+
     public BottomSheetBucketFragment() {
         // Required empty public constructor
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.bottom_sheet_bucket, container, false);
+
+        PreferenceManager.setDefaultValues(v.getContext(), R.xml.root_preferences, false);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(v.getContext());
+
+        isDarkAppTheme = sharedPref.getBoolean("darkAppTheme", false);
 
         updateYn = false;
         bucketListViewModel = new ViewModelProvider.AndroidViewModelFactory(
@@ -72,15 +87,23 @@ public class BottomSheetBucketFragment extends BottomSheetDialogFragment {
         spnProgressType.setAdapter(adapterProgressType);
 
         spnProgressType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @SuppressLint("ResourceAsColor")
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 selectedProgressType = spnProgressType.getItemAtPosition(position).toString();
+
+                try {
+                    if (isDarkAppTheme) {
+                        ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
 
                 if (selectedProgressType.equals("Satisfaction")) {
                     edtGoal.setText("100%");
                     edtGoal.setFocusable(false);
                 } else {
+                    edtGoal.setText("");
                     edtGoal.setFocusable(true);
                 }
 
@@ -148,6 +171,9 @@ public class BottomSheetBucketFragment extends BottomSheetDialogFragment {
 
                 String validationMessage = "";
 
+                if(strGoal.equals("100%")) {
+                    strGoal = "100";
+                }
 
                 if("".equals(strTargetAge)) {
                     validationMessage = "You must enter target age\r\n" + validationMessage;
@@ -194,9 +220,6 @@ public class BottomSheetBucketFragment extends BottomSheetDialogFragment {
                         BucketListViewModel.update(bucket);
                     } else {
                         // Insert
-                        if(strGoal.equals("100%")) {
-                            strGoal = "100";
-                        }
 
                         bucket = new BucketList();
                         bucket.setBucketTitle(bucketTitle);

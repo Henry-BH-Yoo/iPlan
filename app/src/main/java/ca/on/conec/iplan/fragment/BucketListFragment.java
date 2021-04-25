@@ -101,8 +101,6 @@ public class BucketListFragment extends Fragment {
     }
 
 
-
-
     /**
      * binding recyclerView.
      */
@@ -112,8 +110,8 @@ public class BucketListFragment extends Fragment {
         bucketListAdapter = new BucketListAdapter(getActivity().getApplicationContext());
         recyclerView.setAdapter(bucketListAdapter);
 
-        mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(bucketListAdapter));
-        mItemTouchHelper.attachToRecyclerView(recyclerView);
+//        mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(bucketListAdapter));
+//        mItemTouchHelper.attachToRecyclerView(recyclerView);
 
         bucketListAdapter.setBucketList(bucketList);
 
@@ -122,7 +120,13 @@ public class BucketListFragment extends Fragment {
             public void onItemClick(View v, int bucketId) {
                 showBottomSheetDialog(bucketId);
             }
+
+            @Override
+            public void onDeleteBtnClick(View v, BucketList bucket) {
+                BucketListViewModel.delete(bucket);
+            }
         });
+
     }
 
 }

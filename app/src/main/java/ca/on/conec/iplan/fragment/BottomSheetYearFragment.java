@@ -1,6 +1,8 @@
 package ca.on.conec.iplan.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,9 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,6 +43,9 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
     private SharedYearViewModel sharedYearViewModel;
     private boolean isEdit;
 
+    private SharedPreferences sharedPref;
+    private boolean isDarkAppTheme;
+
     public BottomSheetYearFragment() {
     }
 
@@ -46,6 +53,11 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
     public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.bottom_sheet_year, container, false);
+
+
+        PreferenceManager.setDefaultValues(view.getContext(), R.xml.root_preferences, false);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+        isDarkAppTheme = sharedPref.getBoolean("darkAppTheme", false);
 
         etxtYearTodo = view.findViewById(R.id.etxtYearTodo);
         etxtMlNoteYear = view.findViewById(R.id.etxtMlNoteYear);
@@ -66,10 +78,19 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 selectedProgressType = spnProgressTypeYear.getItemAtPosition(position).toString();
 
+                try {
+                    if (isDarkAppTheme) {
+                        ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                    }
+                } catch(Exception e) {
+
+                }
+
                 if (selectedProgressType.equals("Satisfaction")) {
                     etxtGoalYear.setText("100%");
                     etxtGoalYear.setFocusable(false);
                 } else {
+                    etxtGoalYear.setText("");
                     etxtGoalYear.setFocusable(true);
                 }
             }

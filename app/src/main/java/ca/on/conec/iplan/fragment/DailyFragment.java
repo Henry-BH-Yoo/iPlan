@@ -151,8 +151,8 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
                     recyclerViewAdapter = new RecyclerViewAdapter(onlyMonTodos, todoClickListener);
                     recyclerView.setAdapter(recyclerViewAdapter);
 
-                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+//                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+//                    mItemTouchHelper.attachToRecyclerView(recyclerView);
                 });
                 break;
             case 1: // Tue
@@ -165,8 +165,8 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
                     recyclerViewAdapter = new RecyclerViewAdapter(onlyTueTodos, todoClickListener);
                     recyclerView.setAdapter(recyclerViewAdapter);
 
-                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+//                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+//                    mItemTouchHelper.attachToRecyclerView(recyclerView);
                 });
                 break;
             case 2: // Wed
@@ -179,8 +179,8 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
                     recyclerViewAdapter = new RecyclerViewAdapter(onlyWedTodos, todoClickListener);
                     recyclerView.setAdapter(recyclerViewAdapter);
 
-                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+//                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+//                    mItemTouchHelper.attachToRecyclerView(recyclerView);
                 });
                 break;
             case 3: // Thu
@@ -193,8 +193,8 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
                     recyclerViewAdapter = new RecyclerViewAdapter(onlyThuTodos, todoClickListener);
                     recyclerView.setAdapter(recyclerViewAdapter);
 
-                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+//                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+//                    mItemTouchHelper.attachToRecyclerView(recyclerView);
                 });
                 break;
             case 4: // Fri
@@ -207,8 +207,8 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
                     recyclerViewAdapter = new RecyclerViewAdapter(onlyFriTodos, todoClickListener);
                     recyclerView.setAdapter(recyclerViewAdapter);
 
-                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+//                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+//                    mItemTouchHelper.attachToRecyclerView(recyclerView);
                 });
                 break;
             case 5: // Sat
@@ -224,8 +224,8 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
 
                     recyclerView.setAdapter(recyclerViewAdapter);
 
-                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+//                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+//                    mItemTouchHelper.attachToRecyclerView(recyclerView);
                 });
                 break;
             case 6: // Sun
@@ -238,8 +238,8 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
                     recyclerViewAdapter = new RecyclerViewAdapter(onlySunTodos, todoClickListener);
                     recyclerView.setAdapter(recyclerViewAdapter);
 
-                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
-                    mItemTouchHelper.attachToRecyclerView(recyclerView);
+//                    mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
+//                    mItemTouchHelper.attachToRecyclerView(recyclerView);
                 });
                 break;
         }
