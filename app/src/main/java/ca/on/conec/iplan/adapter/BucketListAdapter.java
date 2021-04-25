@@ -1,8 +1,10 @@
 /**
- * FileName : PostListAdapter
+ * FileName : BucketListAdapter.java
  * Purpose : For recycler view.
  * Revision History :
- *          Creted by Byounghak Yoo (Henry) 2020.12.10
+ *          2021 04 19  Henry   Create Recycler Adapter
+ *          2021 04 19  Henry   Modify event listener
+ *          2021 04 24  Henry   modify some bug
  */
 
 package ca.on.conec.iplan.adapter;

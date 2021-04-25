@@ -1,3 +1,13 @@
+/**
+ * FileName : SettingActivity.java
+ * Purpose
+ * Revision History :
+ *      2021.03.25 Henry    Create Setting Activity
+ *      2021.04.23 Henry    Add theme function
+ *      2021.04.23 Henry    Add save password function
+ *      2021.04.24 Henry    Connect Loging Page
+ */
+
 package ca.on.conec.iplan.activity;
 
 import android.content.Intent;

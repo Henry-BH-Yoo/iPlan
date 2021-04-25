@@ -1,3 +1,14 @@
+/**
+ * FileName : MainActivity.java
+ * Purpose
+ * Revision History :
+ *      2021.03.25 Henry Create Main Activity
+ *      2021.04.03 Sean Add Icon and splash screen
+ *      2021.04.23 Sean     Connect Service
+ *      2021.04.23 Sean     Fixed Local notification
+ *      2021.04.24 Sean     Add New Icon
+ *      2021.04.24 Sean     Fixing bug
+ */
 package ca.on.conec.iplan.activity;
 
 import androidx.annotation.NonNull;

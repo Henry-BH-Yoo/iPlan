@@ -1,3 +1,10 @@
+/**
+ * FileName : ItemTouchHelperListener.java
+ * Purpose : For recycler view.
+ * Revision History :
+ *          2021 04 19  Henry   Create Touch Helper interface
+ */
+
 package ca.on.conec.iplan.adapter;
 
 public interface ItemTouchHelperListener {

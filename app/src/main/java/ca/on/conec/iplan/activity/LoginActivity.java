@@ -1,3 +1,8 @@
+/**
+ * FileName : LoginActivity.java
+ * Revision History :
+ *      2021.04.23  Henry Yoo    Create Login Page using shared preferences
+ */
 package ca.on.conec.iplan.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -107,6 +112,9 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
+        /**
+         * When click the Exit Button, exit application.
+         */
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

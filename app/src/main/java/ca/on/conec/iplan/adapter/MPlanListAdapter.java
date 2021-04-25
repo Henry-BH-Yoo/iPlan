@@ -1,8 +1,9 @@
 /**
- * FileName : PostListAdapter
+ * FileName : MPlanListAdapter
  * Purpose : For recycler view.
  * Revision History :
- *          Creted by Byounghak Yoo (Henry) 2020.12.10
+ *          2021 04 23  Henry   Create Monthly plan recycler adapter
+ *          2021 04 24  Henry   Modify event listener
  */
 
 package ca.on.conec.iplan.adapter;
