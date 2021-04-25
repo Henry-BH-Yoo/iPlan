@@ -114,7 +114,7 @@ public class BottomSheetBucketFragment extends BottomSheetDialogFragment {
                         if("100%".equals(edtGoal.getText().toString())) {
                             edtGoal.setText("");
                         }
-                        edtGoal.setFocusable(true);
+                        edtGoal.setFocusableInTouchMode(true);
                     }
 
                 }

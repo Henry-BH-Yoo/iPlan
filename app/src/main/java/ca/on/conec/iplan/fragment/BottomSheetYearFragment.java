@@ -96,12 +96,12 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
 
                 if (selectedProgressType.equals("Satisfaction")) {
                     etxtGoalYear.setText("100%");
-                    etxtGoalYear.setFocusable(false);
+                    etxtGoalYear.setFocusableInTouchMode(false);
                 } else {
                     if("100%".equals(etxtGoalYear.getText().toString())) {
                         etxtGoalYear.setText("");
                     }
-                    etxtGoalYear.setFocusable(true);
+                    etxtGoalYear.setFocusableInTouchMode(true);
                 }
             }
 
