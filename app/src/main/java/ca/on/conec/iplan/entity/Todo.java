@@ -22,52 +22,24 @@ public class Todo {
 
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo(name = "todo_id")
-    public long todoId; // Day, Year
+    public long todoId;
 
-    public String name; // Day, Year
+    public String name;
 
     @ColumnInfo(name = "is_done")
-    public boolean isDone; // Day, Year
+    public boolean isDone;
 
     @ColumnInfo(name = "has_alarm")
-    public boolean hasAlarm; // Day
+    public boolean hasAlarm;
 
     @ColumnInfo(name = "start_time")
-    public LocalTime startTime; // Day
+    public LocalTime startTime;
 
     @ColumnInfo(name = "end_time")
-    public LocalTime endTime; // Day
-
-
-
-//    @ColumnInfo(name = "is_mon")
-//    public boolean isMon;
-//
-//    @ColumnInfo(name = "is_tue")
-//    public boolean isTue;
-//
-//    @ColumnInfo(name = "is_wed")
-//    public boolean isWed;
-//
-//    @ColumnInfo(name = "is_thu")
-//    public boolean isThu;
-//
-//    @ColumnInfo(name = "is_fri")
-//    public boolean isFri;
-//
-//    @ColumnInfo(name = "is_sat")
-//    public boolean isSat;
-//
-//    @ColumnInfo(name = "is_sun")
-//    public boolean isSun;
-
-
+    public LocalTime endTime;
 
     public int days;
 
-
-
-    // it is for day_todo
     public Todo(String name, boolean isDone, boolean hasAlarm, LocalTime startTime, LocalTime endTime) {
         this.name = name;
         this.isDone = isDone;

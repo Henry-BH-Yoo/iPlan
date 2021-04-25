@@ -12,6 +12,9 @@ import androidx.lifecycle.ViewModel;
 
 import ca.on.conec.iplan.entity.TodoYear;
 
+/**
+ * Purpose : This is for editing TodoYear
+ */
 public class SharedYearViewModel extends ViewModel {
 
     private final MutableLiveData<TodoYear> selectedItem = new MutableLiveData<>();

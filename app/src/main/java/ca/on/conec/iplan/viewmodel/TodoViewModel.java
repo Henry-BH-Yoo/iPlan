@@ -19,7 +19,7 @@ import java.util.List;
 import ca.on.conec.iplan.database.iPlanRepository;
 import ca.on.conec.iplan.entity.Todo;
 
-// Inherits from AndroidViewModel, different from SharedViewModel
+
 public class TodoViewModel extends AndroidViewModel {
 
     public static iPlanRepository repository;
@@ -46,10 +46,6 @@ public class TodoViewModel extends AndroidViewModel {
     public LiveData<Todo> get(long id) {
         return repository.get(id);
     }
-
-//    public static Todo get(long id) {
-//        return repository.get(id);
-//    }
 
     public static void insert(Todo todo) {
         repository.insert(todo);

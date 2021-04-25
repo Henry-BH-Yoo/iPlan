@@ -14,7 +14,9 @@ import androidx.room.TypeConverter;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-// Type converter for Room DB, or general use
+/**
+ * Purpose : Type converter for Room DB, or general use
+ */
 public class LocalTimeConverter  {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -33,7 +35,7 @@ public class LocalTimeConverter  {
         if (time == null) {
             return null;
         } else {
-            return time.format(DateTimeFormatter.ofPattern("HH:mm")); // ex 22:40 or 07:01?
+            return time.format(DateTimeFormatter.ofPattern("HH:mm")); // ex 22:40 or 07:01
         }
     }
 }

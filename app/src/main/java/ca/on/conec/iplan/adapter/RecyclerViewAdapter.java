@@ -41,7 +41,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private final OnTodoClickListener todoClickListener;
 
 
-    // Add OnTodoClickListener to RecyclerViewAdapter to allow each row in RecyclerView is clickable
+    /**
+     * Purpose: Add OnTodoClickListener to RecyclerViewAdapter to allow each row in RecyclerView is clickable
+     */
     public RecyclerViewAdapter(List<Todo> todoList, OnTodoClickListener onTodoClickListener) {
         this.todoList = todoList;
         this.todoClickListener = onTodoClickListener;
@@ -56,6 +58,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(view);
     }
 
+    /**
+     * Purpose: Show view with condition
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -125,13 +130,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public boolean onItemMove(int from_position, int to_position) {
-
-//        Todo todo = todoList.get(from_position);
-//        todoList.remove(from_position);
-//        todoList.add(to_position, todo);
-//        notifyItemMoved(from_position, to_position);
-//        return true;
-
         return false;
     }
 

@@ -148,6 +148,9 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
         return v;
     }
 
+    /**
+     * Purpose: when selects days in day tab, get refreshed List, set recyclerViewAdapter
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void selectDayAdapter(int position) {
         switch (position) {
@@ -255,12 +258,18 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
         }
     }
 
+    /**
+     * Purpose: show BottomSheet Dialog
+     */
     private void showBottomSheetDialog() {
         this.getChildFragmentManager().beginTransaction().add(bottomSheetDayFragment, bottomSheetDayFragment.getTag());
 
         bottomSheetDayFragment.show(getParentFragmentManager(), bottomSheetDayFragment.getTag());
     }
 
+    /**
+     * Purpose: show BottomSheet Dialog to edit
+     */
     @Override
     public void onTodoClick(Todo todo) {
         // now sharedViewModel has selected DayTodo which can be used anywhere
@@ -270,6 +279,9 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
         showBottomSheetDialog();
     }
 
+    /**
+     * Purpose: check the checkbox, then todo.isDone set to done
+     */
     @Override
     public void onTodoIsDoneChkClick(Todo todo) {
         Log.d("My", "onChkboxClick: " + todo.getName());
@@ -281,6 +293,9 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * Purpose: delete selected todo
+     */
     @Override
     public void onTodoDeleteImgClick(Todo todo) {
         TodoViewModel.delete(todo);

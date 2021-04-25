@@ -159,12 +159,18 @@ public class YearlyFragment extends Fragment implements OnTodoYearClickListener 
         return v;
     }
 
+    /**
+     * Purpose: show BottomSheet Dialog
+     */
     private void showBottomSheetDialog() {
         this.getChildFragmentManager().beginTransaction().add(bottomSheetYearFragment, bottomSheetYearFragment.getTag());
 
         bottomSheetYearFragment.show(getParentFragmentManager(), bottomSheetYearFragment.getTag());
     }
 
+    /**
+     * Purpose: show BottomSheet Dialog to edit
+     */
     @Override
     public void onTodoYearClick(TodoYear todoYear) {
         // now sharedYearViewModel has selected YearTodo which can be used anywhere
@@ -174,6 +180,9 @@ public class YearlyFragment extends Fragment implements OnTodoYearClickListener 
         showBottomSheetDialog();
     }
 
+    /**
+     * Purpose: delete selected todo
+     */
     @Override
     public void onTodoDeleteImgClick(TodoYear todoYear) {
         TodoYearViewModel.delete(todoYear);

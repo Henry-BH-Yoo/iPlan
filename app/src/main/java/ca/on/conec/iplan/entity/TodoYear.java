@@ -23,7 +23,6 @@ public class TodoYear {
     public String name;
 
 
-
     @ColumnInfo(name = "progress_Type")
     public String progressType;
 
@@ -31,8 +30,6 @@ public class TodoYear {
     public double currentStatus;
 
     public double goal;
-
-
 
 
     public String note;

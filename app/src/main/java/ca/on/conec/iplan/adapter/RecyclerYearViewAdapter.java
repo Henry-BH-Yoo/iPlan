@@ -27,6 +27,9 @@ public class RecyclerYearViewAdapter extends RecyclerView.Adapter<RecyclerYearVi
 
     private final OnTodoYearClickListener todoYearClickListener;
 
+    /**
+     * Purpose: Add onTodoYearClickListener to RecyclerViewAdapter to allow each row in RecyclerView is clickable
+     */
     public RecyclerYearViewAdapter(List<TodoYear> todoYearList, OnTodoYearClickListener onTodoYearClickListener) {
         this.todoYearList = todoYearList;
         this.todoYearClickListener = onTodoYearClickListener;
@@ -40,6 +43,9 @@ public class RecyclerYearViewAdapter extends RecyclerView.Adapter<RecyclerYearVi
         return new ViewHolder(view);
     }
 
+    /**
+     * Purpose: Show view on each row
+     */
     @Override
     public void onBindViewHolder(@NonNull RecyclerYearViewAdapter.ViewHolder holder, int position) {
 

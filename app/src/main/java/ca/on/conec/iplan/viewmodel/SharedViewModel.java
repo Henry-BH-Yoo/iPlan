@@ -13,8 +13,9 @@ import androidx.lifecycle.ViewModel;
 
 import ca.on.conec.iplan.entity.Todo;
 
-// Inherits from ViewModel, different from TodoViewModel
-// This is for editing DayTodo
+/**
+ * Purpose : This is for editing DayTodo
+ */
 public class SharedViewModel extends ViewModel {
 
     private final MutableLiveData<Todo> selectedItem = new MutableLiveData<>();
