@@ -66,28 +66,30 @@ public class BucketListFragment extends Fragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         recyclerView.addItemDecoration(new DividerItemDecoration(v.getContext(), 1));
 
+        try {
+            bucketListViewModel = new ViewModelProvider.AndroidViewModelFactory(
+                    getActivity().getApplication()).create(BucketListViewModel.class);
 
-        bucketListViewModel = new ViewModelProvider.AndroidViewModelFactory(
-                getActivity().getApplication()).create(BucketListViewModel.class);
+            bottomSheetBucketFragment = new BottomSheetBucketFragment();
 
-        bottomSheetBucketFragment = new BottomSheetBucketFragment();
+            CoordinatorLayout frameLayout = v.findViewById(R.id.bottomSheetBucket);
+            BottomSheetBehavior<CoordinatorLayout> bottomSheetBehavior = BottomSheetBehavior.from(frameLayout);
+            bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.STATE_HIDDEN);
 
-        CoordinatorLayout frameLayout = v.findViewById(R.id.bottomSheetBucket);
-        BottomSheetBehavior<CoordinatorLayout> bottomSheetBehavior = BottomSheetBehavior.from(frameLayout);
-        bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.STATE_HIDDEN);
+            FloatingActionButton addBucketBtn = v.findViewById(R.id.addBucket);
 
-        FloatingActionButton addBucketBtn = v.findViewById(R.id.addBucket);
+            addBucketBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showBottomSheetDialog(0);
+                }
+            });
 
-        addBucketBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showBottomSheetDialog(0);
-            }
-        });
+            getDataList();
 
-        getDataList();
-
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return v;
     }
 
@@ -103,11 +105,14 @@ public class BucketListFragment extends Fragment {
 
 
     private void getDataList() {
-
-        bucketListViewModel.findAll().observe(getViewLifecycleOwner(),  bucketList -> {
-            this.bucketList = bucketList;
-            bindAdapter();
-        });
+        try {
+            bucketListViewModel.findAll().observe(getViewLifecycleOwner(), bucketList -> {
+                this.bucketList = bucketList;
+                bindAdapter();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

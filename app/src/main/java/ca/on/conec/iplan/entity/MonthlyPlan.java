@@ -1,3 +1,10 @@
+/**
+ * FileName : BucketList.java
+ * Purpose
+ * Revision History :
+ *      2021.04.23 Henry    Create
+ */
+
 package ca.on.conec.iplan.entity;
 
 import androidx.room.ColumnInfo;

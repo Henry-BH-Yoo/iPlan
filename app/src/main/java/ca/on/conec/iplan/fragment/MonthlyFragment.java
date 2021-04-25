@@ -173,41 +173,50 @@ public class MonthlyFragment extends Fragment {
 
     private void getDataList() {
 
-        monthlyPlanViewModel.findAll().observe(getViewLifecycleOwner(),  mPlanList -> {
-            this.mPlanList = mPlanList;
-            bindAdapter();
-        });
+        try {
+            monthlyPlanViewModel.findAll().observe(getViewLifecycleOwner(), mPlanList -> {
+                this.mPlanList = mPlanList;
+                bindAdapter();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void getPlanByDay(String currentDate) {
-
-        monthlyPlanViewModel.findByDay(currentDate).observe(getViewLifecycleOwner(),  mPlanList -> {
-            if(currentDate.equals(selectedDate)) {
-                this.mPlanList = mPlanList;
-                bindAdapter();
-            }
-        });
-
+        try {
+            monthlyPlanViewModel.findByDay(currentDate).observe(getViewLifecycleOwner(), mPlanList -> {
+                if (currentDate.equals(selectedDate)) {
+                    this.mPlanList = mPlanList;
+                    bindAdapter();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     private void getPlanByMonth(String currentMonth) {
+        try {
+            monthlyPlanViewModel.findByMonth(currentMonth).observe(getViewLifecycleOwner(), mPlanList -> {
+                materialCalendarView.removeDecorator(eventDecorator);
+                ArrayList<CalendarDay> dateList = new ArrayList<CalendarDay>();
+                for (MonthlyPlan m : mPlanList) {
+                    int year = Integer.parseInt(m.getMPlanDate().substring(0, 4));
+                    int month = Integer.parseInt(m.getMPlanDate().substring(5, 6)) - 1;
+                    int day = Integer.parseInt(m.getMPlanDate().substring(6, 8));
 
-        monthlyPlanViewModel.findByMonth(currentMonth).observe(getViewLifecycleOwner(),  mPlanList -> {
-            materialCalendarView.removeDecorator(eventDecorator);
-            ArrayList<CalendarDay> dateList = new ArrayList<CalendarDay>();
-            for(MonthlyPlan m : mPlanList) {
-                int year = Integer.parseInt(m.getMPlanDate().substring(0,4));
-                int month = Integer.parseInt(m.getMPlanDate().substring(5,6)) - 1;
-                int day = Integer.parseInt(m.getMPlanDate().substring(6,8));
+                    dateList.add(CalendarDay.from(year, month, day));
+                }
 
-                dateList.add(CalendarDay.from(year , month , day));
-            }
+                eventDecorator = new EventDecorator(Color.RED, dateList);
+                materialCalendarView.addDecorator(eventDecorator);
 
-            eventDecorator = new EventDecorator(Color.RED , dateList);
-            materialCalendarView.addDecorator(eventDecorator);
-
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

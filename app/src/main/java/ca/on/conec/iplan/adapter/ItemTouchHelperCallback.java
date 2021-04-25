@@ -62,11 +62,8 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
         super.clearView(recyclerView, viewHolder);
 
         if(mFrom != -1 && mTo != -1 && mFrom != mTo) {
-            //reallyMoved(dragFrom, dragTo);
-            Log.d("DEBUG" , "Completed Drag and deop");
             listener.onComplete(mFrom , mTo);
         }
-
         mFrom = mTo = -1;
 
     }

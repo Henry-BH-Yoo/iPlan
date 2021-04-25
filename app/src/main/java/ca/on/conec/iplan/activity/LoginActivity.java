@@ -51,80 +51,84 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        edtPassword = findViewById(R.id.edtPassword);
-        btnExit = findViewById(R.id.btnExit);
-        btnLogin = findViewById(R.id.btnLogin);
-        imgView = findViewById(R.id.resultImgView);
 
-        isUsePassword = sharedPref.getBoolean("pwCheck" , false);
-        password = sharedPref.getString("edtPassword" , "");
-        
-        edtPassword.requestFocus();
+        try {
+            edtPassword = findViewById(R.id.edtPassword);
+            btnExit = findViewById(R.id.btnExit);
+            btnLogin = findViewById(R.id.btnLogin);
+            imgView = findViewById(R.id.resultImgView);
 
-        if(isUsePassword && !"".equals(password)) {
-            // Password Check
+            isUsePassword = sharedPref.getBoolean("pwCheck", false);
+            password = sharedPref.getString("edtPassword", "");
 
-            btnLogin.setOnClickListener(new View.OnClickListener() {
+            edtPassword.requestFocus();
+
+            if (isUsePassword && !"".equals(password)) {
+                // Password Check
+
+                btnLogin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String enteredPwd = edtPassword.getText().toString();
+
+
+                        imgView.setVisibility(View.VISIBLE);
+                        imgView.setAlpha(0f);
+
+                        if (enteredPwd.equals(password)) {
+                            imgView.setImageResource(R.drawable.ic_approved);
+                            imgView.animate().alpha(1f).setDuration(ANIMATION_DURATION).setListener(
+                                    new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                        }
+                                    }
+                            );
+                        } else {
+                            imgView.setImageResource(R.drawable.ic_reject);
+                            imgView.animate().alpha(1f).setDuration(ANIMATION_DURATION).setListener(
+                                    new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+
+                                            imgView.animate().alpha(0f).setDuration(ANIMATION_DURATION).setListener(
+                                                    new AnimatorListenerAdapter() {
+                                                        @Override
+                                                        public void onAnimationEnd(Animator animation) {
+                                                            imgView.setVisibility(View.GONE);
+                                                        }
+                                                    }
+                                            );
+                                        }
+                                    }
+                            );
+                        }
+
+
+                    }
+                });
+
+            } else {
+                // Go Main Activity
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+
+            /**
+             * When click the Exit Button, exit application.
+             */
+            btnExit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String enteredPwd = edtPassword.getText().toString();
-
-
-                    imgView.setVisibility(View.VISIBLE);
-                    imgView.setAlpha(0f);
-
-                    if(enteredPwd.equals(password)) {
-                        imgView.setImageResource(R.drawable.ic_approved);
-                        imgView.animate().alpha(1f).setDuration(ANIMATION_DURATION).setListener(
-                                new AnimatorListenerAdapter() {
-                                    @Override
-                                    public void onAnimationEnd(Animator animation) {
-                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                    }
-                                }
-                        );
-                    } else {
-                        imgView.setImageResource(R.drawable.ic_reject);
-                        imgView.animate().alpha(1f).setDuration(ANIMATION_DURATION).setListener(
-                                new AnimatorListenerAdapter() {
-                                    @Override
-                                    public void onAnimationEnd(Animator animation) {
-
-                                        imgView.animate().alpha(0f).setDuration(ANIMATION_DURATION).setListener(
-                                                new AnimatorListenerAdapter() {
-                                                    @Override
-                                                    public void onAnimationEnd(Animator animation) {
-                                                        imgView.setVisibility(View.GONE);
-                                                    }
-                                                }
-                                        );
-                                    }
-                                }
-                        );
-                    }
-
-
+                    moveTaskToBack(true);
+                    finishAndRemoveTask();
+                    android.os.Process.killProcess(android.os.Process.myPid());
                 }
             });
 
-        } else {
-            // Go Main Activity
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        /**
-         * When click the Exit Button, exit application.
-         */
-        btnExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveTaskToBack(true);
-                finishAndRemoveTask();
-                android.os.Process.killProcess(android.os.Process.myPid());
-            }
-        });
-
-
 
     }
 

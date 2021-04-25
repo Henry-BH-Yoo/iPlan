@@ -97,33 +97,41 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            checkBox = itemView.findViewById(R.id.chkIsDone);
+            try {
+                checkBox = itemView.findViewById(R.id.chkIsDone);
 
-            dayTodo = itemView.findViewById(R.id.txtDayRow);
-            dayStartTime = itemView.findViewById(R.id.txtDayStartTime);
-            imgBtnAlarm = itemView.findViewById(R.id.imgBtnHasAlarm);
-            imgBtnDelete = itemView.findViewById(R.id.imgBtnDelete);
+                dayTodo = itemView.findViewById(R.id.txtDayRow);
+                dayStartTime = itemView.findViewById(R.id.txtDayStartTime);
+                imgBtnAlarm = itemView.findViewById(R.id.imgBtnHasAlarm);
+                imgBtnDelete = itemView.findViewById(R.id.imgBtnDelete);
 
-            this.onTodoClickListener = todoClickListener;
+                this.onTodoClickListener = todoClickListener;
 
-            itemView.setOnClickListener(this);
-            checkBox.setOnClickListener(this);
-            imgBtnDelete.setOnClickListener(this);
+                itemView.setOnClickListener(this);
+                checkBox.setOnClickListener(this);
+                imgBtnDelete.setOnClickListener(this);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
         public void onClick(View v) {
-            Todo currentTodo = todoList.get(getAdapterPosition());
+            try {
+                Todo currentTodo = todoList.get(getAdapterPosition());
 
-            int id = v.getId();
+                int id = v.getId();
 
-            if (id == R.id.day_row_layout) {
-                // OnTodoClickListener Interface can delegate this information to whoever implements it
-                onTodoClickListener.onTodoClick(currentTodo);
-            } else if (id == R.id.chkIsDone) {
-                onTodoClickListener.onTodoIsDoneChkClick(currentTodo);
-            } else if (id == R.id.imgBtnDelete) {
-                onTodoClickListener.onTodoDeleteImgClick(currentTodo);
+                if (id == R.id.day_row_layout) {
+                    // OnTodoClickListener Interface can delegate this information to whoever implements it
+                    onTodoClickListener.onTodoClick(currentTodo);
+                } else if (id == R.id.chkIsDone) {
+                    onTodoClickListener.onTodoIsDoneChkClick(currentTodo);
+                } else if (id == R.id.imgBtnDelete) {
+                    onTodoClickListener.onTodoDeleteImgClick(currentTodo);
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
             }
         }
     }

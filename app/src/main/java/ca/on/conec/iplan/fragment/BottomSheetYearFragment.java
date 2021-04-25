@@ -98,7 +98,9 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
                     etxtGoalYear.setText("100%");
                     etxtGoalYear.setFocusable(false);
                 } else {
-                    etxtGoalYear.setText("");
+                    if("100%".equals(etxtGoalYear.getText().toString())) {
+                        etxtGoalYear.setText("");
+                    }
                     etxtGoalYear.setFocusable(true);
                 }
             }

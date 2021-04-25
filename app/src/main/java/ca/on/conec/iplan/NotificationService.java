@@ -69,9 +69,6 @@ public class NotificationService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate() {
-
-        Log.d("DEBUG" , ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SErvice Create??");
-
         final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -87,19 +84,12 @@ public class NotificationService extends Service {
         LocalTime timeNow = LocalTime.now();
         LocalTime timeHrLater = timeNow.plusHours(1);
 
-//        Log.d("DEBUG" , "timeHrStart : " + timeHrStart);
-//        Log.d("DEBUG" , "timeHrLater : " + timeHrLater);
-
         String timeS = LocalTimeConverter.toTimeString(timeNow);
         String timeE = LocalTimeConverter.toTimeString(timeHrLater);
 
         // get day of week
         LocalDateTime now = LocalDateTime.now();
         int days = now.getDayOfWeek().getValue();
-
-//        Log.d("DEBUG" , "timeS : " + timeS);
-//        Log.d("DEBUG" , "timeE : " + timeE);
-//        Log.d("DEBUG" , "days : " + days + "");
 
         // It is for LiveData method in iPlanRepository.java
         todoViewModel = new ViewModelProvider.AndroidViewModelFactory(
@@ -108,7 +98,6 @@ public class NotificationService extends Service {
 
         todoViewModel.getTodosWithAlarm(timeS, timeE, days).observeForever(todos -> {
             todosWithAlarm = todos;
-            Log.d("DEBUG" , "todosWithAlarm : " + todosWithAlarm);
 
             if (todosWithAlarm != null && todosWithAlarm.size() > 0 ) {
 

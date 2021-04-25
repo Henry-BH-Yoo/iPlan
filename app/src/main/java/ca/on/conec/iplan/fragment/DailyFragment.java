@@ -284,7 +284,6 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
      */
     @Override
     public void onTodoIsDoneChkClick(Todo todo) {
-        Log.d("My", "onChkboxClick: " + todo.getName());
 
         todo.setDone(!todo.isDone);
         TodoViewModel.update(todo);

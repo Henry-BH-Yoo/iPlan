@@ -58,10 +58,8 @@ public abstract class AppDatabase extends RoomDatabase {
                 // invoke Dao, and write
                 TodoDao todoDao = INSTANCE.todoDao();
                 todoDao.deleteAll(); // make it clean
-
                 BucketListDao bucketListDao = INSTANCE.bucketDao();
                 TodoYearDao todoYearDao = INSTANCE.todoYearDao();
-
                 MonthlyPlanDao mPlanDao = INSTANCE.mPlanDao();
 
             });

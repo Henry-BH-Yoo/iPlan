@@ -109,39 +109,42 @@ public class BucketListAdapter extends RecyclerView.Adapter<BucketListAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            title = (TextView) itemView.findViewById(R.id.list_title);
-            deleteBtn = (ImageButton) itemView.findViewById(R.id.deleteBtn);
+            try {
+                title = (TextView) itemView.findViewById(R.id.list_title);
+                deleteBtn = (ImageButton) itemView.findViewById(R.id.deleteBtn);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION) {
-                        bListener.onItemClick(v, bucketList.get(pos).bucketId);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            bListener.onItemClick(v, bucketList.get(pos).bucketId);
+                        }
                     }
-                }
-            });
+                });
 
-            title.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION) {
-                        bListener.onItemClick(v, bucketList.get(pos).bucketId);
+                title.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            bListener.onItemClick(v, bucketList.get(pos).bucketId);
+                        }
                     }
-                }
-            });
+                });
 
-            deleteBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION) {
-                        bListener.onDeleteBtnClick(v, bucketList.get(pos));
+                deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = getAdapterPosition();
+                        if (pos != RecyclerView.NO_POSITION) {
+                            bListener.onDeleteBtnClick(v, bucketList.get(pos));
+                        }
                     }
-                }
-            });
-
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
         }
 

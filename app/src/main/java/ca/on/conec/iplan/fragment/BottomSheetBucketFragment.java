@@ -79,88 +79,98 @@ public class BottomSheetBucketFragment extends BottomSheetDialogFragment {
             bucketId = 0;
         }
 
-        Log.d("DEBUG" , "bucketId >>>" + bucketId);
         // Assign ID.
-        edtBucketTitle = v.findViewById(R.id.edtBucketTitle);
-        edtCurrentStatus = v.findViewById(R.id.edtCurrentStatus);
-        edtGoal = v.findViewById(R.id.edtGoal);
-        edtTargetAge = v.findViewById(R.id.edtTargetAge);
+        try {
+            edtBucketTitle = v.findViewById(R.id.edtBucketTitle);
+            edtCurrentStatus = v.findViewById(R.id.edtCurrentStatus);
+            edtGoal = v.findViewById(R.id.edtGoal);
+            edtTargetAge = v.findViewById(R.id.edtTargetAge);
 
-        resetBtn = v.findViewById(R.id.resetBtn);
-        saveBtn = v.findViewById(R.id.saveBtn);
+            resetBtn = v.findViewById(R.id.resetBtn);
+            saveBtn = v.findViewById(R.id.saveBtn);
 
-        spnProgressType = v.findViewById(R.id.spnProgressType);
-        ArrayAdapter<String> adapterProgressType = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, getResources().getStringArray(R.array.progressType_values));
-        spnProgressType.setAdapter(adapterProgressType);
+            spnProgressType = v.findViewById(R.id.spnProgressType);
+            ArrayAdapter<String> adapterProgressType = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, getResources().getStringArray(R.array.progressType_values));
+            spnProgressType.setAdapter(adapterProgressType);
 
-        spnProgressType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                selectedProgressType = spnProgressType.getItemAtPosition(position).toString();
+            spnProgressType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                    selectedProgressType = spnProgressType.getItemAtPosition(position).toString();
 
-                try {
-                    if (isDarkAppTheme) {
-                        ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                    try {
+                        if (isDarkAppTheme) {
+                            ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch(Exception e) {
-                    e.printStackTrace();
+
+                    if (selectedProgressType.equals("Satisfaction")) {
+                        edtGoal.setText("100%");
+                        edtGoal.setFocusable(false);
+                    } else {
+
+                        if("100%".equals(edtGoal.getText().toString())) {
+                            edtGoal.setText("");
+                        }
+                        edtGoal.setFocusable(true);
+                    }
+
                 }
 
-                if (selectedProgressType.equals("Satisfaction")) {
-                    edtGoal.setText("100%");
-                    edtGoal.setFocusable(false);
-                } else {
-                    edtGoal.setText("");
-                    edtGoal.setFocusable(true);
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    // No Action
                 }
+            });
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // No Action
-            }
-        });
-
-        resetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearBucketForm();
-            }
-        });
+            resetBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clearBucketForm();
+                }
+            });
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
 
         if(bucketId != 0 ) {
-            bucketListViewModel.find(bucketId).observe(getViewLifecycleOwner(),  bucket ->{
-                this.bucket = bucket;
-                int progressTypeIdx;
-                String currentStatusStr = "";
-                String goalStr = "";
-                String progressType = bucket.getProgressType();
-                if(progressType.equals("Quantity")) {
-                    progressTypeIdx = 0;
-                    currentStatusStr = String.valueOf((int)bucket.currentStatus);
-                    goalStr = String.valueOf((int)bucket.goal);
-                } else if (progressType.equals("Satisfaction")) {
-                    progressTypeIdx = 1;
-                    currentStatusStr = String.valueOf(String.valueOf(bucket.currentStatus));
-                    goalStr = String.valueOf("100%");
-                } else {
-                    progressTypeIdx = 2;
-                    currentStatusStr = String.valueOf(bucket.currentStatus);
-                    goalStr = String.valueOf(bucket.goal);
-                }
+            try {
+                bucketListViewModel.find(bucketId).observe(getViewLifecycleOwner(), bucket -> {
+                    this.bucket = bucket;
+                    int progressTypeIdx;
+                    String currentStatusStr = "";
+                    String goalStr = "";
+                    String progressType = bucket.getProgressType();
+                    if (progressType.equals("Quantity")) {
+                        progressTypeIdx = 0;
+                        currentStatusStr = String.valueOf((int) bucket.currentStatus);
+                        goalStr = String.valueOf((int) bucket.goal);
+                    } else if (progressType.equals("Satisfaction")) {
+                        progressTypeIdx = 1;
+                        currentStatusStr = String.valueOf(String.valueOf(bucket.currentStatus));
+                        goalStr = String.valueOf("100%");
+                    } else {
+                        progressTypeIdx = 2;
+                        currentStatusStr = String.valueOf(bucket.currentStatus);
+                        goalStr = String.valueOf(bucket.goal);
+                    }
+                    spnProgressType.setSelection(progressTypeIdx);
 
-                spnProgressType.setSelection(progressTypeIdx);
+                    Log.d("DEBUG" , "TTTT");
+                    edtBucketTitle.setText(bucket.getBucketTitle());
+                    edtCurrentStatus.setText(currentStatusStr);
+                    edtGoal.setText(goalStr);
+                    edtTargetAge.setText(String.valueOf(bucket.getTargetAge()));
 
-                edtBucketTitle.setText(bucket.getBucketTitle());
-                edtCurrentStatus.setText(currentStatusStr);
-                edtGoal.setText(goalStr);
-                edtTargetAge.setText(String.valueOf(bucket.getTargetAge()));
+                    updateYn = true;
 
-                Log.d("DEBUG" , "Goal String :" + goalStr);
-                updateYn = true;
 
-            });
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -177,66 +187,74 @@ public class BottomSheetBucketFragment extends BottomSheetDialogFragment {
                 String strTargetAge = edtTargetAge.getText().toString();
 
                 String validationMessage = "";
+                try {
+                    if (strGoal.equals("100%")) {
+                        strGoal = "100";
+                    }
 
-                if(strGoal.equals("100%")) {
-                    strGoal = "100";
+                    if ("".equals(strTargetAge)) {
+                        validationMessage = "You must enter target age\r\n" + validationMessage;
+                        edtTargetAge.requestFocus();
+                        validationOk = false;
+                    }
+
+                    if ("".equals(strGoal)) {
+                        validationMessage = "You must enter goal\r\n" + validationMessage;
+                        edtGoal.requestFocus();
+                        validationOk = false;
+                    }
+
+                    if ("".equals(strCurrentStatus)) {
+                        validationMessage = "You must enter current status.\r\n" + validationMessage;
+                        edtCurrentStatus.requestFocus();
+                        validationOk = false;
+                    }
+
+
+                    if ("".equals(bucketTitle)) {
+                        validationMessage = "You must enter title\r\n" + validationMessage;
+                        edtBucketTitle.requestFocus();
+                        validationOk = false;
+                    }
+
+                    if (Double.parseDouble(strCurrentStatus) > Double.parseDouble(strGoal)) {
+                        validationMessage = "Current status cannot be over Goal\r\n" + validationMessage;
+                        edtCurrentStatus.requestFocus();
+                        validationOk = false;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-                if("".equals(strTargetAge)) {
-                    validationMessage = "You must enter target age\r\n" + validationMessage;
-                    edtTargetAge.requestFocus();
-                    validationOk = false;
-                }
-
-                if("".equals(strGoal)) {
-                    validationMessage = "You must enter goal\r\n" + validationMessage;
-                    edtGoal.requestFocus();
-                    validationOk = false;
-                }
-
-                if("".equals(strCurrentStatus)) {
-                    validationMessage = "You must enter current status.\r\n" + validationMessage;
-                    edtCurrentStatus.requestFocus();
-                    validationOk = false;
-                }
-
-
-                if("".equals(bucketTitle)) {
-                    validationMessage = "You must enter title\r\n" + validationMessage;
-                    edtBucketTitle.requestFocus();
-                    validationOk = false;
-                }
-
-                if( Double.parseDouble(strCurrentStatus) > Double.parseDouble(strGoal) ) {
-                    validationMessage = "Current status cannot be over Goal\r\n" + validationMessage;
-                    edtCurrentStatus.requestFocus();
-                    validationOk = false;
-                }
-
                 if(validationOk) {
 
                     if(updateYn) {
                         // update
+                        try {
+                            bucket.setBucketTitle(bucketTitle);
+                            bucket.setProgressType(selectedProgressType);
+                            bucket.setCurrentStatus(Double.parseDouble(strCurrentStatus));
+                            bucket.setGoal(Double.parseDouble(strGoal));
+                            bucket.setTargetAge(Integer.parseInt(strTargetAge));
 
-                        bucket.setBucketTitle(bucketTitle);
-                        bucket.setProgressType(selectedProgressType);
-                        bucket.setCurrentStatus(Double.parseDouble(strCurrentStatus));
-                        bucket.setGoal(Double.parseDouble(strGoal));
-                        bucket.setTargetAge(Integer.parseInt(strTargetAge));
-
-                        BucketListViewModel.update(bucket);
+                            BucketListViewModel.update(bucket);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         // Insert
+                        try {
+                            bucket = new BucketList();
+                            bucket.setBucketTitle(bucketTitle);
+                            bucket.setProgressType(selectedProgressType);
+                            bucket.setCurrentStatus(Double.parseDouble(strCurrentStatus));
+                            bucket.setGoal(Double.parseDouble(strGoal));
+                            bucket.setTargetAge(Integer.parseInt(strTargetAge));
+                            bucket.setOrder(9999);
 
-                        bucket = new BucketList();
-                        bucket.setBucketTitle(bucketTitle);
-                        bucket.setProgressType(selectedProgressType);
-                        bucket.setCurrentStatus(Double.parseDouble(strCurrentStatus));
-                        bucket.setGoal(Double.parseDouble(strGoal));
-                        bucket.setTargetAge(Integer.parseInt(strTargetAge));
-                        bucket.setOrder(9999);
-
-                        saveBucketList(bucket);
+                            saveBucketList(bucket);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
 

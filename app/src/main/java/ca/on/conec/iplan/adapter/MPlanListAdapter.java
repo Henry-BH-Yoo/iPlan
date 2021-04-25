@@ -74,8 +74,6 @@ public class MPlanListAdapter extends RecyclerView.Adapter<MPlanListAdapter.View
 
     @Override
     public void onItemSwipe(int position) {
-
-        Log.d("DEBUG" , "Binder Swipe"  + mPlanList.toString());
         MonthlyPlan mPlan = mPlanList.get(position);
         MonthlyPlanViewModel.delete(mPlan);
 
@@ -97,45 +95,49 @@ public class MPlanListAdapter extends RecyclerView.Adapter<MPlanListAdapter.View
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            title = (TextView) itemView.findViewById(R.id.list_title);
-            deleteBtn = (ImageButton) itemView.findViewById(R.id.deleteBtn);
+            try {
+                    title = (TextView) itemView.findViewById(R.id.list_title);
+                    deleteBtn = (ImageButton) itemView.findViewById(R.id.deleteBtn);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION) {
-                        bListener.onItemClick(v, mPlanList.get(pos).mPlanDate , mPlanList.get(pos).mPlanId);
-                    }
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int pos = getAdapterPosition();
+                            if (pos != RecyclerView.NO_POSITION) {
+                                bListener.onItemClick(v, mPlanList.get(pos).mPlanDate, mPlanList.get(pos).mPlanId);
+                            }
+                        }
+                    });
+
+                    title.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int pos = getAdapterPosition();
+                            if (pos != RecyclerView.NO_POSITION) {
+                                bListener.onItemClick(v, mPlanList.get(pos).mPlanDate, mPlanList.get(pos).mPlanId);
+                            }
+                        }
+                    });
+
+                    deleteBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int pos = getAdapterPosition();
+                            if (pos != RecyclerView.NO_POSITION) {
+                                bListener.onDeleteBtnClick(v, mPlanList.get(pos));
+                            }
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            });
+            }
 
-            title.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION) {
-                        bListener.onItemClick(v, mPlanList.get(pos).mPlanDate , mPlanList.get(pos).mPlanId);
-                    }
-                }
-            });
 
-            deleteBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION) {
-                        bListener.onDeleteBtnClick(v, mPlanList.get(pos));
-                    }
-                }
-            });
+            public void onBind (MonthlyPlan mPlan,int position){
 
-        }
-
-        public void onBind(MonthlyPlan mPlan,int position) {
-
-            title.setText(mPlan.getMPlanTitle());
-        }
+                title.setText(mPlan.getMPlanTitle());
+            }
     }
 
 

@@ -52,63 +52,67 @@ public class MainActivity extends AppCompatActivity {
 
         setAppTheme();
 
-        // Start Local Notification
-        startService(new Intent(getApplicationContext(), NotificationService.class));
+        try {
+            // Start Local Notification
+            startService(new Intent(getApplicationContext(), NotificationService.class));
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
 
-        actionBar = getSupportActionBar();
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            actionBar = getSupportActionBar();
+            bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
 
-        fragment = new DailyFragment();
+            fragment = new DailyFragment();
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_area , fragment);
-        transaction.commit();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.main_area, fragment);
+            transaction.commit();
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
 
-                    case R.id.bottom_tab_daily:
-                        menuNumber = 1;
-                        fragment = new DailyFragment();
-                        actionBar.setTitle("Day Plan");
-                        break;
-                    case R.id.bottom_tab_monthly:
-                        menuNumber = 2;
-                        fragment = new MonthlyFragment();
-                        actionBar.setTitle("Month Plan");
-                        break;
-                    case R.id.bottom_tab_year:
-                        menuNumber = 3;
-                        fragment = new YearlyFragment();
-                        actionBar.setTitle("Year Plan");
-                        break;
-                    case R.id.bottom_tab_life:
-                        menuNumber = 4;
-                        fragment = new BucketListFragment();
-                        actionBar.setTitle("Bucket List");
-                        break;
+                        case R.id.bottom_tab_daily:
+                            menuNumber = 1;
+                            fragment = new DailyFragment();
+                            actionBar.setTitle("Day Plan");
+                            break;
+                        case R.id.bottom_tab_monthly:
+                            menuNumber = 2;
+                            fragment = new MonthlyFragment();
+                            actionBar.setTitle("Month Plan");
+                            break;
+                        case R.id.bottom_tab_year:
+                            menuNumber = 3;
+                            fragment = new YearlyFragment();
+                            actionBar.setTitle("Year Plan");
+                            break;
+                        case R.id.bottom_tab_life:
+                            menuNumber = 4;
+                            fragment = new BucketListFragment();
+                            actionBar.setTitle("Bucket List");
+                            break;
+                    }
+
+                    if (fragment != null) {
+
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.main_area, fragment);
+                        transaction.commit();
+                        transaction.addToBackStack(null);
+
+                        return true;
+                    }
+
+                    return false;
+
                 }
-
-                if(fragment != null) {
-
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.main_area, fragment);
-                    transaction.commit();
-                    transaction.addToBackStack(null);
-
-                    return true;
-                }
-
-                return false;
-
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

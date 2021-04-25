@@ -76,7 +76,6 @@ public class BottomSheetMonthFragment extends BottomSheetDialogFragment {
         mPlanViewModel = new ViewModelProvider.AndroidViewModelFactory(
                 getActivity().getApplication()).create(MonthlyPlanViewModel.class);
 
-        Log.d("DEBUG" , "mPlan Date : " + mPlanDate);
 
         // Assign ID
         edtMPlanTitle = v.findViewById(R.id.edtMPlanTitle);
@@ -230,55 +229,57 @@ public class BottomSheetMonthFragment extends BottomSheetDialogFragment {
 
                 String validationMessage = "";
 
+                try {
 
-                if("".equals(mPlanEnd)) {
-                    validationMessage = "You must enter end time.\r\n" + validationMessage;
-                    edtMPlanStart.requestFocus();
-                    validationOk = false;
-                }
-
-                if("".equals(mPlanStart)) {
-                    validationMessage = "You must enter start time.\r\n" + validationMessage;
-                    edtMPlanEnd.requestFocus();
-                    validationOk = false;
-                }
-
-                if("".equals(mPlanTitle)) {
-                    validationMessage = "You must enter your plan.\r\n" + validationMessage;
-                    edtMPlanTitle.requestFocus();
-                    validationOk = false;
-                }
-
-                if(validationOk) {
-
-                    if(updateYn) {
-                        // update
-                        mPlan.setMPlanTitle(mPlanTitle);
-                        mPlan.setMPlanDate(mPlanDate);
-                        mPlan.setMPlanStart(mPlanStart);
-                        mPlan.setMPlanEnd(mPlanEnd);
-                        MonthlyPlanViewModel.update(mPlan);
-
-                    } else {
-
-                        mPlan = new MonthlyPlan();
-                        mPlan.setMPlanTitle(mPlanTitle);
-                        mPlan.setMPlanDate(mPlanDate);
-                        mPlan.setMPlanStart(mPlanStart);
-                        mPlan.setMPlanEnd(mPlanEnd);
-
-                        Log.d("DEBUG" , mPlan.toString());
-
-                        // Insert
-                        MonthlyPlanViewModel.insert(mPlan);
+                    if ("".equals(mPlanEnd)) {
+                        validationMessage = "You must enter end time.\r\n" + validationMessage;
+                        edtMPlanStart.requestFocus();
+                        validationOk = false;
                     }
 
+                    if ("".equals(mPlanStart)) {
+                        validationMessage = "You must enter start time.\r\n" + validationMessage;
+                        edtMPlanEnd.requestFocus();
+                        validationOk = false;
+                    }
 
-                    clearMonthPlanForm();
-                    dismiss();
+                    if ("".equals(mPlanTitle)) {
+                        validationMessage = "You must enter your plan.\r\n" + validationMessage;
+                        edtMPlanTitle.requestFocus();
+                        validationOk = false;
+                    }
 
-                } else {
-                    Snackbar.make(v, validationMessage, Snackbar.LENGTH_LONG).show();
+                    if (validationOk) {
+
+                        if (updateYn) {
+                            // update
+                            mPlan.setMPlanTitle(mPlanTitle);
+                            mPlan.setMPlanDate(mPlanDate);
+                            mPlan.setMPlanStart(mPlanStart);
+                            mPlan.setMPlanEnd(mPlanEnd);
+                            MonthlyPlanViewModel.update(mPlan);
+
+                        } else {
+
+                            mPlan = new MonthlyPlan();
+                            mPlan.setMPlanTitle(mPlanTitle);
+                            mPlan.setMPlanDate(mPlanDate);
+                            mPlan.setMPlanStart(mPlanStart);
+                            mPlan.setMPlanEnd(mPlanEnd);
+
+                            // Insert
+                            MonthlyPlanViewModel.insert(mPlan);
+                        }
+
+
+                        clearMonthPlanForm();
+                        dismiss();
+
+                    } else {
+                        Snackbar.make(v, validationMessage, Snackbar.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });

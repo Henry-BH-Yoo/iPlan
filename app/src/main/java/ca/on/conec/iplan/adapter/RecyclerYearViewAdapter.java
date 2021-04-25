@@ -69,14 +69,17 @@ public class RecyclerYearViewAdapter extends RecyclerView.Adapter<RecyclerYearVi
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            try {
+                yearTodo = itemView.findViewById(R.id.txtYearRow);
+                imgBtnDelete = itemView.findViewById(R.id.imgBtnDeleteYear);
 
-            yearTodo = itemView.findViewById(R.id.txtYearRow);
-            imgBtnDelete = itemView.findViewById(R.id.imgBtnDeleteYear);
+                this.onTodoYearClickListener = todoYearClickListener;
 
-            this.onTodoYearClickListener = todoYearClickListener;
-
-            itemView.setOnClickListener(this);
-            imgBtnDelete.setOnClickListener(this);
+                itemView.setOnClickListener(this);
+                imgBtnDelete.setOnClickListener(this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         @Override

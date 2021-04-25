@@ -144,6 +144,7 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
 //        //this sharedViewModel should be the same one in DailyFragment sharedViewModel
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
+
         LocalTime now = LocalTime.now();
 
         etxtStartTime.setOnClickListener(v -> {
