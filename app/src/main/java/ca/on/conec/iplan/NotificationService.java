@@ -1,3 +1,11 @@
+/**
+ * FileName : NotificationService.java
+ * Purpose
+ * Revision History :
+ *      2021.04.23 Sean    Create
+ *      2021.04.24 Sean    Modify notification service
+ *      2021.04.24 Sean    Modify notification service icon
+ */
 package ca.on.conec.iplan;
 
 import android.app.Notification;

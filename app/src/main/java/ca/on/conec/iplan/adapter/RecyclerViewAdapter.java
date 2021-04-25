@@ -1,3 +1,11 @@
+/**
+ * FileName : RecyclerViewAdapter.java
+ * Purpose
+ * Revision History :
+ *      2021.04.18 Sean    Create
+ *      2021.04.20 Sean    Add onTodoIsDoneChkClick
+ *      2021.04.24 Sean    Add delete function with delete image button
+ */
 package ca.on.conec.iplan.adapter;
 
 import android.app.Notification;

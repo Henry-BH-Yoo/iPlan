@@ -1,3 +1,11 @@
+/**
+ * FileName : BottomSheetYearFragment.java
+ * Purpose
+ * Revision History :
+ *      2021.04.18 Sean    Create
+ *      2021.04.22 Sean    Add function of CRUD, except 'Progress'
+ *      2021.04.23 Sean    Add spinner 'Progress'
+ */
 package ca.on.conec.iplan.fragment;
 
 import android.annotation.SuppressLint;

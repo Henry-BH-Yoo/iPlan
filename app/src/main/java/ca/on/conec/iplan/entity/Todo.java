@@ -1,3 +1,11 @@
+/**
+ * FileName : Todo.java
+ * Purpose
+ * Revision History :
+ *      2021.04.18 Sean    Create
+ *      2021.04.18 Sean    Add 7 chips for days
+ *      2021.04.23 Sean    Delete 7 chips, Add int days
+ */
 package ca.on.conec.iplan.entity;
 
 import androidx.room.ColumnInfo;

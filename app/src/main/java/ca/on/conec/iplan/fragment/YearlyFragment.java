@@ -1,3 +1,13 @@
+/**
+ * FileName : YearlyFragment.java
+ * Purpose
+ * Revision History :
+ *      2021.04.08 Sean    Create
+ *      2021.04.18 Sean    Add floating action button
+ *      2021.04.22 Sean    Add function of CRUD, except 'Progress'
+ *      2021.04.23 Sean    Add spinner 'Year'
+ *      2021.04.24 Sean    Add delete function on delete image icon
+ */
 package ca.on.conec.iplan.fragment;
 
 import android.annotation.SuppressLint;

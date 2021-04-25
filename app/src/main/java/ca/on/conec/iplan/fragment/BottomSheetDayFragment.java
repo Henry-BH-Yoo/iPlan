@@ -1,3 +1,12 @@
+/**
+ * FileName : BottomSheetDayFragment.java
+ * Purpose
+ * Revision History :
+ *      2021.04.18 Sean    Create
+ *      2021.04.20 Sean    Add 7day tab and filtering, CRUD working
+ *      2021.04.24 Sean    Modify time picker for time formatting
+ *      2021.04.24 Sean    Modify time picker to dialog
+ */
 package ca.on.conec.iplan.fragment;
 
 import android.app.TimePickerDialog;

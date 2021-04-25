@@ -1,3 +1,13 @@
+/**
+ * FileName : DailyFragment.java
+ * Purpose
+ * Revision History :
+ *      2021.04.08 Sean    Create
+ *      2021.04.20 Sean    Add function of create and delete
+ *      2021.04.23 Sean    Add tab default selection on Monday
+ *      2021.04.24 Sean    Add tab default selection on current day
+ *      2021.04.24 Sean    Add delete function on delete image icon
+ */
 package ca.on.conec.iplan.fragment;
 
 import android.os.AsyncTask;
