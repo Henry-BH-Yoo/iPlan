@@ -1,5 +1,6 @@
 package ca.on.conec.iplan.fragment;
 
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 
 import ca.on.conec.iplan.R;
 import ca.on.conec.iplan.adapter.ItemTouchHelperCallback;
+import ca.on.conec.iplan.adapter.ItemTouchHelperListener;
 import ca.on.conec.iplan.adapter.OnTodoClickListener;
 import ca.on.conec.iplan.adapter.RecyclerViewAdapter;
 import ca.on.conec.iplan.viewmodel.SharedViewModel;
@@ -137,7 +139,7 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private void selectDayAdapter(int position) {
+    public void selectDayAdapter(int position) {
         switch (position) {
             case 0: // Mon
                 todoViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
@@ -217,6 +219,9 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
 
                     // Attach RecyclerView Adapter
                     recyclerViewAdapter = new RecyclerViewAdapter(onlySatTodos, todoClickListener);
+
+//                    recyclerViewAdapter.notifyDataSetChanged();
+
                     recyclerView.setAdapter(recyclerViewAdapter);
 
                     mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(recyclerViewAdapter));
@@ -261,6 +266,14 @@ public class DailyFragment extends Fragment implements OnTodoClickListener {
 
         todo.setDone(!todo.isDone);
         TodoViewModel.update(todo);
+
+        // it will refresh RecyclerView
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onTodoDeleteImgClick(Todo todo) {
+        TodoViewModel.delete(todo);
 
         // it will refresh RecyclerView
         recyclerViewAdapter.notifyDataSetChanged();

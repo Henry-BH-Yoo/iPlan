@@ -82,14 +82,13 @@ public class YearlyFragment extends Fragment implements OnTodoYearClickListener 
         // Helper for filtering List and Adapter
         todoYearClickListener = this;
 
-        // select only Mon by default
+
         todoYearViewModel.getAllTodos().observe(getViewLifecycleOwner(), todos -> {
             allYearTodos = todos;
 
             // Attach RecyclerView Adapter
             recyclerYearViewAdapter = new RecyclerYearViewAdapter(allYearTodos, todoYearClickListener);
             recyclerView.setAdapter(recyclerYearViewAdapter);
-
 
             //todo swipe delete
             // when swipe from right to left, ERROR of array null
@@ -142,5 +141,13 @@ public class YearlyFragment extends Fragment implements OnTodoYearClickListener 
         sharedYearViewModel.setIsEdit(true);
 
         showBottomSheetDialog();
+    }
+
+    @Override
+    public void onTodoDeleteImgClick(TodoYear todoYear) {
+        TodoYearViewModel.delete(todoYear);
+
+        // it will refresh RecyclerView
+        recyclerYearViewAdapter.notifyDataSetChanged();
     }
 }

@@ -1,5 +1,6 @@
 package ca.on.conec.iplan.fragment;
 
+import android.app.TimePickerDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.time.LocalTime;
+import java.util.Calendar;
 
 import ca.on.conec.iplan.R;
 import ca.on.conec.iplan.database.LocalTimeConverter;
@@ -32,12 +34,11 @@ import ca.on.conec.iplan.viewmodel.TodoViewModel;
 // When clicks the Floating Plus btn, this fragment will pop up
 public class BottomSheetDayFragment extends BottomSheetDialogFragment {
 
-    private EditText etxtTodo;
+    private EditText etxtTodo, etxtStartTime, etxtEndTime;
     private Button btnSaveTodo, btnResetDay;
     private Switch swAlarm;
     private Chip chipMon, chipTue, chipWed, chipThu, chipFri, chipSat, chipSun;
 
-    private TimePicker startTimePicker, endTimePicker;
     private String startTimeStr, endTimeStr;
 
 
@@ -66,10 +67,12 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
         chipSat = view.findViewById(R.id.chipSat);
         chipSun = view.findViewById(R.id.chipSun);
 
-        startTimePicker = view.findViewById(R.id.startTimePicker);
-        startTimePicker.setIs24HourView(true);
-        endTimePicker = view.findViewById(R.id.endTimePicker);
-        endTimePicker.setIs24HourView(true);
+        etxtStartTime = view.findViewById(R.id.etxtStartTime);
+        etxtEndTime = view.findViewById(R.id.etxtEndTime);
+
+        LocalTime now = LocalTime.now();
+        etxtStartTime.setHint(LocalTimeConverter.toTimeString(now));
+        etxtEndTime.setHint(LocalTimeConverter.toTimeString(now));
 
         return view;
     }
@@ -89,19 +92,10 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
             swAlarm.setChecked(todo.hasAlarm);
 
             String startTstr = LocalTimeConverter.toTimeString(todo.startTime);
-            String[] startTarr = startTstr.split(":");
-            int startHr = Integer.parseInt(startTarr[0]);
-            int startMn = Integer.parseInt(startTarr[1]);
-            startTimePicker.setHour(startHr);
-            startTimePicker.setMinute(startMn);
-
+            etxtStartTime.setText(startTstr);
 
             String endTstr = LocalTimeConverter.toTimeString(todo.endTime);
-            String[] endTarr = endTstr.split(":");
-            int endHr = Integer.parseInt(endTarr[0]);
-            int endMn = Integer.parseInt(endTarr[1]);
-            endTimePicker.setHour(endHr);
-            endTimePicker.setMinute(endMn);
+            etxtEndTime.setText(endTstr);
 
             chipMon.setChecked(todo.days == 1);
             chipTue.setChecked(todo.days == 2);
@@ -141,40 +135,63 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
 //        //this sharedViewModel should be the same one in DailyFragment sharedViewModel
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
+        LocalTime now = LocalTime.now();
 
-        startTimePicker.setOnTimeChangedListener((view1, hourOfDay, minute) -> {
-            if (hourOfDay < 10 && minute < 10) {
-                String newHr = "0" + hourOfDay;
-                String newMin = "0" + minute;
-                startTimeStr = newHr + ":" + newMin;
-            } else if (hourOfDay < 10 && minute >= 10) {
-                String newHour = "0" + hourOfDay;
-                startTimeStr = newHour + ":" + minute;
-            } else if (hourOfDay > 10 && minute < 10) {
-                String newMin = "0" + minute;
-                startTimeStr = hourOfDay + ":" + newMin;
-            } else {
-                startTimeStr = hourOfDay + ":" + minute;
-            }
-        });
-        Log.d("DEBUG" , "startTimeStr : " + startTimeStr);
+        etxtStartTime.setOnClickListener(v -> {
+            int hr = now.getHour();
+            int min = now.getMinute();
 
-        endTimePicker.setOnTimeChangedListener((view1, hourOfDay, minute) -> {
-            if (hourOfDay < 10 && minute < 10) {
-                String newHr = "0" + hourOfDay;
-                String newMin = "0" + minute;
-                endTimeStr = newHr + ":" + newMin;
-            } else if (hourOfDay < 10 && minute >= 10) {
-                String newHour = "0" + hourOfDay;
-                endTimeStr = newHour + ":" + minute;
-            } else if (hourOfDay > 10 && minute < 10) {
-                String newMin = "0" + minute;
-                endTimeStr = hourOfDay + ":" + newMin;
-            } else {
-                endTimeStr = hourOfDay + ":" + minute;
-            }
+            TimePickerDialog mTimePicker;
+            mTimePicker = new TimePickerDialog(v.getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar , (view1, hourOfDay, minute) -> {
+
+                if (hourOfDay < 10 && minute < 10) {
+                    String newHr = "0" + hourOfDay;
+                    String newMin = "0" + minute;
+                    startTimeStr = newHr + ":" + newMin;
+                } else if (hourOfDay < 10 && minute >= 10) {
+                    String newHour = "0" + hourOfDay;
+                    startTimeStr = newHour + ":" + minute;
+                } else if (hourOfDay > 10 && minute < 10) {
+                    String newMin = "0" + minute;
+                    startTimeStr = hourOfDay + ":" + newMin;
+                } else {
+                    startTimeStr = hourOfDay + ":" + minute;
+                }
+
+                // Display in EditText
+                etxtStartTime.setText(startTimeStr);
+            }, hr, min, false);
+            mTimePicker.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            mTimePicker.show();
         });
 
+        etxtEndTime.setOnClickListener(v -> {
+            int hr = now.getHour();
+            int min = now.getMinute();
+
+            TimePickerDialog mTimePicker;
+            mTimePicker = new TimePickerDialog(v.getContext(), android.R.style.Theme_Holo_Light_Dialog_NoActionBar , (view1, hourOfDay, minute) -> {
+
+                if (hourOfDay < 10 && minute < 10) {
+                    String newHr = "0" + hourOfDay;
+                    String newMin = "0" + minute;
+                    endTimeStr = newHr + ":" + newMin;
+                } else if (hourOfDay < 10 && minute >= 10) {
+                    String newHour = "0" + hourOfDay;
+                    endTimeStr = newHour + ":" + minute;
+                } else if (hourOfDay > 10 && minute < 10) {
+                    String newMin = "0" + minute;
+                    endTimeStr = hourOfDay + ":" + newMin;
+                } else {
+                    endTimeStr = hourOfDay + ":" + minute;
+                }
+
+                // Display in EditText
+                etxtEndTime.setText(endTimeStr);
+            }, hr, min, false);
+            mTimePicker.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            mTimePicker.show();
+        });
 
         // validate before save or edit
         btnSaveTodo.setOnClickListener(v -> {
@@ -207,7 +224,7 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
 
                 if (TextUtils.isEmpty(startTimeStr)) {
                     validationMessage = "You must enter Start time\r\n" + validationMessage;
-                    startTimePicker.requestFocus();
+                    etxtStartTime.requestFocus();
                     validationOk = false;
                 } else {
                     startTime = LocalTimeConverter.toTime(startTimeStr);
@@ -215,7 +232,7 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
 
                 if (TextUtils.isEmpty(endTimeStr)) {
                     validationMessage = "You must enter End time\r\n" + validationMessage;
-                    endTimePicker.requestFocus();
+                    etxtEndTime.requestFocus();
                     validationOk = false;
                 } else {
                     endTime = LocalTimeConverter.toTime(endTimeStr);
@@ -223,7 +240,7 @@ public class BottomSheetDayFragment extends BottomSheetDialogFragment {
 
                 if (startTime != null && endTime != null && startTime.isAfter(endTime)) {
                     validationMessage = "Start time must be sooner than End time\r\n" + validationMessage;
-                    endTimePicker.requestFocus();
+                    etxtEndTime.requestFocus();
                     validationOk = false;
                 }
 

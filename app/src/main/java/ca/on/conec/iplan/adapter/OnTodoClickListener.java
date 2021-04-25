@@ -9,4 +9,6 @@ public interface OnTodoClickListener {
     void onTodoClick(Todo todo);
 
     void onTodoIsDoneChkClick(Todo todo);
+
+    void onTodoDeleteImgClick(Todo todo);
 }

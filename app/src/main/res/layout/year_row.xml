@@ -28,6 +28,16 @@
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
 
+            <ImageButton
+                android:id="@+id/imgBtnDeleteYear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="#00FFFFFF"
+                android:clickable="true"
+                app:srcCompat="@drawable/new_ic_delete"
+                android:focusable="true" />
+
         </LinearLayout>
 
     </LinearLayout>

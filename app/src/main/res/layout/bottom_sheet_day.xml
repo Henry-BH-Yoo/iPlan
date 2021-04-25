@@ -111,19 +111,31 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TimePicker
-                android:id="@+id/startTimePicker"
+            <EditText
+                android:id="@+id/etxtStartTime"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:timePickerMode="spinner" />
+                android:focusable="false"
+                android:clickable="true"
+                android:textAlignment="center"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="20dp"
+                />
 
-            <TimePicker
-                android:id="@+id/endTimePicker"
+            <EditText
+                android:id="@+id/etxtEndTime"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:timePickerMode="spinner" />
+                android:textAlignment="center"
+                android:focusable="false"
+                android:clickable="true"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:padding="20dp"
+                />
 
         </LinearLayout>
 

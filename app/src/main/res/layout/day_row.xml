@@ -23,7 +23,7 @@
                 android:id="@+id/txtDayStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="4.8"
+                android:layout_weight="5.5"
                 android:paddingStart="5dp"
                 android:hint="@string/start_time"
                 android:textSize="16sp" />
@@ -33,7 +33,7 @@
                 android:id="@+id/txtDayRow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 android:hint="@string/day_todo_name"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
@@ -42,7 +42,7 @@
                 android:id="@+id/imgBtnHasAlarm"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="5.5"
+                android:layout_weight="7"
                 android:background="#00FFFFFF"
                 android:visibility="invisible"
                 app:srcCompat="@drawable/new_ic_alarm" />
@@ -51,8 +51,18 @@
                 android:id="@+id/chkIsDone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5.9"
+                android:layout_weight="7"
                 android:buttonTint="@color/teal_700" />
+
+            <ImageButton
+                android:id="@+id/imgBtnDelete"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:background="#00FFFFFF"
+                android:clickable="true"
+                app:srcCompat="@drawable/new_ic_delete"
+                android:focusable="true" />
 
         </LinearLayout>
 

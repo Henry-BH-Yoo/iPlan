@@ -40,6 +40,10 @@ public class TodoViewModel extends AndroidViewModel {
         return repository.get(id);
     }
 
+//    public static Todo get(long id) {
+//        return repository.get(id);
+//    }
+
     public static void insert(Todo todo) {
         repository.insert(todo);
     }

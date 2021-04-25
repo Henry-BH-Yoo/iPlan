@@ -1,6 +1,9 @@
 package ca.on.conec.iplan.adapter;
 
+import android.app.Notification;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +14,22 @@ import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import ca.on.conec.iplan.R;
 import ca.on.conec.iplan.database.LocalTimeConverter;
 import ca.on.conec.iplan.entity.Todo;
+import ca.on.conec.iplan.fragment.DailyFragment;
+import ca.on.conec.iplan.viewmodel.TodoViewModel;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements ItemTouchHelperListener {
 
     private final List<Todo> todoList;
-
     private final OnTodoClickListener todoClickListener;
 
 
@@ -32,6 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.todoClickListener = onTodoClickListener;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,7 +58,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.dayStartTime.setText(LocalTimeConverter.toTimeString(todo.getStartTime()));
 
         if (todo.hasAlarm) {
-            holder.imageButton.setVisibility(View.VISIBLE);
+            holder.imgBtnAlarm.setVisibility(View.VISIBLE);
         }
 
         if (todo.isDone) {
@@ -69,7 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public AppCompatTextView dayTodo;
         public AppCompatTextView dayStartTime;
         public AppCompatCheckBox checkBox;
-        public AppCompatImageButton imageButton;
+        public AppCompatImageButton imgBtnAlarm, imgBtnDelete;
 
         OnTodoClickListener onTodoClickListener;
 
@@ -80,12 +88,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             dayTodo = itemView.findViewById(R.id.txtDayRow);
             dayStartTime = itemView.findViewById(R.id.txtDayStartTime);
-            imageButton = itemView.findViewById(R.id.imgBtnHasAlarm);
+            imgBtnAlarm = itemView.findViewById(R.id.imgBtnHasAlarm);
+            imgBtnDelete = itemView.findViewById(R.id.imgBtnDelete);
 
             this.onTodoClickListener = todoClickListener;
 
             itemView.setOnClickListener(this);
             checkBox.setOnClickListener(this);
+            imgBtnDelete.setOnClickListener(this);
         }
 
         @Override
@@ -99,40 +109,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 onTodoClickListener.onTodoClick(currentTodo);
             } else if (id == R.id.chkIsDone) {
                 onTodoClickListener.onTodoIsDoneChkClick(currentTodo);
+            } else if (id == R.id.imgBtnDelete) {
+                onTodoClickListener.onTodoDeleteImgClick(currentTodo);
             }
         }
     }
 
-
-    // For swipe to delete
     @Override
     public boolean onItemMove(int from_position, int to_position) {
 
 //        Todo todo = todoList.get(from_position);
 //        todoList.remove(from_position);
 //        todoList.add(to_position, todo);
+//        notifyItemMoved(from_position, to_position);
+//        return true;
 
-        notifyItemMoved(from_position, to_position);
-
-        return true;
+        return false;
     }
 
-    // For swipe to delete
     @Override
     public void onItemSwipe(int position) {
-
-//        Todo todo = todoList.get(position);
-//        TodoViewModel.delete(todo);
-//        todoList.remove(position);
-
-        notifyItemRemoved(position);
     }
 
-    // For swipe to delete
     @Override
     public void onComplete(int from_position, int to_position) {
-
-//        this.notifyDataSetChanged();
     }
 
 }

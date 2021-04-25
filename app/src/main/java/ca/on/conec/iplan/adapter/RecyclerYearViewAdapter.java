@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +50,7 @@ public class RecyclerYearViewAdapter extends RecyclerView.Adapter<RecyclerYearVi
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public AppCompatTextView yearTodo;
+        public AppCompatImageButton imgBtnDelete;
 
         OnTodoYearClickListener onTodoYearClickListener;
 
@@ -56,10 +58,12 @@ public class RecyclerYearViewAdapter extends RecyclerView.Adapter<RecyclerYearVi
             super(itemView);
 
             yearTodo = itemView.findViewById(R.id.txtYearRow);
+            imgBtnDelete = itemView.findViewById(R.id.imgBtnDeleteYear);
 
             this.onTodoYearClickListener = todoYearClickListener;
 
             itemView.setOnClickListener(this);
+            imgBtnDelete.setOnClickListener(this);
         }
 
         @Override
@@ -71,6 +75,8 @@ public class RecyclerYearViewAdapter extends RecyclerView.Adapter<RecyclerYearVi
             if (id == R.id.year_row_layout) {
                 // OnTodoYearClickListener Interface can delegate this information to whoever implements it
                 onTodoYearClickListener.onTodoYearClick(currentTodoYear);
+            } else if (id == R.id.imgBtnDeleteYear) {
+                onTodoYearClickListener.onTodoDeleteImgClick(currentTodoYear);
             }
         }
     }
@@ -78,20 +84,14 @@ public class RecyclerYearViewAdapter extends RecyclerView.Adapter<RecyclerYearVi
 
     @Override
     public boolean onItemMove(int from_position, int to_position) {
-        notifyItemMoved(from_position, to_position);
-
-        return true;
+        return false;
     }
 
     @Override
     public void onItemSwipe(int position) {
-
-
-        notifyItemRemoved(position);
     }
 
     @Override
     public void onComplete(int from_position, int to_position) {
-
     }
 }

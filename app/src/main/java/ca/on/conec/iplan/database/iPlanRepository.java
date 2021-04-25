@@ -31,6 +31,10 @@ public class iPlanRepository {
         return todoDao.get(id);
     }
 
+//    public LiveData<List<Todo>> get(long id) {
+//        return todoDao.get(id);
+//    }
+
 
     public LiveData<List<Todo>> getTodosWithAlarm(String startTime, String hrLaterTime, int days) {
         return todoDao.getTodosWithAlarm(startTime, hrLaterTime, days);
