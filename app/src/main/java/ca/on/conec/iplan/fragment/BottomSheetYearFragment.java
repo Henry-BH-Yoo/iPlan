@@ -80,36 +80,6 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
         ArrayAdapter<String> adapterProgressType = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, getResources().getStringArray(R.array.progressType_values));
 
         spnProgressTypeYear.setAdapter(adapterProgressType);
-        spnProgressTypeYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                selectedProgressType = spnProgressTypeYear.getItemAtPosition(position).toString();
-
-                try {
-                    if (isDarkAppTheme) {
-                        ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
-                    }
-                } catch(Exception e) {
-
-                }
-
-                if (selectedProgressType.equals("Satisfaction")) {
-                    etxtGoalYear.setText("100%");
-                    etxtGoalYear.setFocusableInTouchMode(false);
-                } else {
-                    if("100%".equals(etxtGoalYear.getText().toString())) {
-                        etxtGoalYear.setText("");
-                    }
-                    etxtGoalYear.setFocusableInTouchMode(true);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // No Action
-            }
-        });
 
         return view;
     }
@@ -127,7 +97,6 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
             etxtYearTodo.setText(todoYear.getName());
             etxtMlNoteYear.setText(todoYear.getNote());
 
-
             String currentStatusStr = "";
             String goalStr = "";
             String progressType = todoYear.getProgressType();
@@ -141,7 +110,7 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
                 goalStr = "100%";
             } else {
                 progressTypeIdx = 2;
-                currentStatusStr = String.valueOf((int)todoYear.currentStatus);
+                currentStatusStr = String.valueOf(todoYear.currentStatus);
                 goalStr = String.valueOf(todoYear.goal);
             }
             spnProgressTypeYear.setSelection(progressTypeIdx);
@@ -170,6 +139,37 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
 
         //this sharedYearViewModel should be the same one in YearlyFragment sharedYearViewModel
         sharedYearViewModel = new ViewModelProvider(requireActivity()).get(SharedYearViewModel.class);
+
+
+        spnProgressTypeYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                selectedProgressType = spnProgressTypeYear.getItemAtPosition(position).toString();
+                try {
+                    if (isDarkAppTheme) {
+                        ((TextView) adapterView.getChildAt(0)).setTextColor(Color.WHITE);
+                    }
+                } catch(Exception e) {
+                }
+
+                if (selectedProgressType.equals("Satisfaction")) {
+                    etxtGoalYear.setText("100%");
+                    etxtGoalYear.setFocusableInTouchMode(false);
+                } else {
+                    etxtGoalYear.setFocusableInTouchMode(true);
+                    if("100%".equals(etxtGoalYear.getText().toString())) {
+                        etxtGoalYear.setText("");
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // No Action
+            }
+        });
+
 
         // validate before save or edit
         btnSaveYear.setOnClickListener(v -> {
@@ -210,7 +210,15 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
 
                         updateTodoYear.setProgressType(selectedProgressType);
                         updateTodoYear.setCurrentStatus(Double.parseDouble(strCurrentStatus));
-                        updateTodoYear.setGoal(Double.parseDouble(strGoal));
+
+                        String progressType = updateTodoYear.getProgressType();
+                        if(progressType.equals("Quantity")) {
+                            updateTodoYear.setGoal(Double.parseDouble(strGoal));
+                        } else if (progressType.equals("Satisfaction")) {
+                            updateTodoYear.setGoal(100.00);
+                        } else {
+                            updateTodoYear.setGoal(Double.parseDouble(strGoal));
+                        }
 
                         TodoYearViewModel.update(updateTodoYear);
                         sharedYearViewModel.setIsEdit(false);
@@ -221,7 +229,15 @@ public class BottomSheetYearFragment extends BottomSheetDialogFragment {
 
                         todoYear.setProgressType(selectedProgressType);
                         todoYear.setCurrentStatus(Double.parseDouble(strCurrentStatus));
-                        todoYear.setGoal(Double.parseDouble(strGoal));
+
+                        String progressType = todoYear.getProgressType();
+                        if(progressType.equals("Quantity")) {
+                            todoYear.setGoal(Double.parseDouble(strGoal));
+                        } else if (progressType.equals("Satisfaction")) {
+                            todoYear.setGoal(100.00);
+                        } else {
+                            todoYear.setGoal(Double.parseDouble(strGoal));
+                        }
 
                         TodoYearViewModel.insert(todoYear);
                     }
